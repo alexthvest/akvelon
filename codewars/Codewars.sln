@@ -20,6 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConvertToCamelCase", "Conve
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalRoot", "Sum of Digits - Digital Root\DigitalRoot.csproj", "{8C362A60-DA79-46CD-9475-BC4B98287BFC}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTower", "Build Tower\BuildTower.csproj", "{AFCC5F5E-20BD-4D2B-A551-2C787DAB251A}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Permutations", "Permutations\Permutations.csproj", "{A1C3402E-1B78-4718-BF4A-8CA54B752517}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumOfIntervals", "Sum of Intervals\SumOfIntervals.csproj", "{32066C22-E82D-43B8-9834-63749DA6171D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,5 +107,9 @@ Global
 		{A1C3402E-1B78-4718-BF4A-8CA54B752517}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1C3402E-1B78-4718-BF4A-8CA54B752517}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C3402E-1B78-4718-BF4A-8CA54B752517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32066C22-E82D-43B8-9834-63749DA6171D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32066C22-E82D-43B8-9834-63749DA6171D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32066C22-E82D-43B8-9834-63749DA6171D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32066C22-E82D-43B8-9834-63749DA6171D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
