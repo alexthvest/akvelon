@@ -4,25 +4,22 @@ internal static class ZerosMover
 {
     public static int[] MoveToEnd(int[] sequence)
     {
-        var result = new List<int>();
-        var zeroCounter = 0;
+        var resultArray = new int[sequence.Length];
+        var currentIndex = 0;
 
         foreach (var number in sequence)
-        {
-            if (number == 0)
+        { 
+            if (number != 0)
             {
-                zeroCounter++;
-                continue;
+                resultArray[currentIndex++] = number;
             }
-
-            result.Add(number);
         }
 
-        for (var i = 0; i < zeroCounter; i++)
+        for (var i = 0; i < sequence.Length - currentIndex; i++)
         {
-            result.Add(0);
+            resultArray[currentIndex++] = 0;
         }
 
-        return result.ToArray();
+        return resultArray;
     }
 }
