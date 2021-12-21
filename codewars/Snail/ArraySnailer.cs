@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace Snail;
+﻿namespace Snail;
 
 internal static class ArraySnailer
 {
