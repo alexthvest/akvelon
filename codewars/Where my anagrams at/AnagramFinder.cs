@@ -2,7 +2,7 @@
 
 internal static class AnagramFinder
 {
-    public static IEnumerable<string> Find(string word, ICollection<string> options)
+    public static IEnumerable<string> Find(string word, IEnumerable<string> options)
     {
         var sortedWord = word.OrderBy(c => c);
 
