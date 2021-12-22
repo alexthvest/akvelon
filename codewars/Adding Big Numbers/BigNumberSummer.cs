@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace AddingBigNumbers;
+﻿namespace AddingBigNumbers;
 
 internal static class BigNumberSummer
 {
