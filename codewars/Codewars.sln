@@ -4,12 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidParentheses", "Valid Parentheses\ValidParentheses.csproj", "{D55EFD46-E59E-490A-8701-74FE1EF8DC4E}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeMaxSum", "Fun with tree - max sum\TreeMaxSum.csproj", "{E4D5F0E0-6099-43E2-9D97-E13F6BB6EF9B}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePigLatin", "Simple Pig Latin\SimplePigLatin.csproj", "{9018BB56-BCCD-48FF-8288-2EA9DF9FBED8}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddingBigNumbers", "Adding Big Numbers\AddingBigNumbers.csproj", "{A46AD5E3-5F75-4030-8512-5D41E9B97582}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snail", "Snail\Snail.csproj", "{BF879CAA-29DE-45C5-BFC3-45C907634A8C}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FibProduct", "Product of consecutive Fib numbers\FibProduct.csproj", "{22E1302D-D5DC-42EA-B2DA-FF310FC45AD9}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhereMyAnagramsAt", "Where my anagrams at\WhereMyAnagramsAt.csproj", "{ABB1C41B-27B1-4960-B56A-52B0C402F7C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuplicateEncoder", "Duplicate Encoder\DuplicateEncoder.csproj", "{6935B4A7-F55B-4212-BCF3-1CC2977FE8DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,5 +44,13 @@ Global
 		{ABB1C41B-27B1-4960-B56A-52B0C402F7C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABB1C41B-27B1-4960-B56A-52B0C402F7C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABB1C41B-27B1-4960-B56A-52B0C402F7C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E7D1090-BA51-42E7-91AE-75243B94B0F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E7D1090-BA51-42E7-91AE-75243B94B0F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E7D1090-BA51-42E7-91AE-75243B94B0F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E7D1090-BA51-42E7-91AE-75243B94B0F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6935B4A7-F55B-4212-BCF3-1CC2977FE8DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6935B4A7-F55B-4212-BCF3-1CC2977FE8DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6935B4A7-F55B-4212-BCF3-1CC2977FE8DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6935B4A7-F55B-4212-BCF3-1CC2977FE8DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
