@@ -1,17 +1,21 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build-env
+
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY ./RpgSaga/*.csproj ./
-RUN dotnet restore
+COPY src/RpgSaga/*.csproj ./RpgSaga/
 
-# Copy everything else and build
-COPY ./RpgSaga/* ./
-COPY ./_stylecop/ /_stylecop/
+RUN dotnet restore "RpgSaga/RpgSaga.csproj"
+
+COPY src/ .
+
+WORKDIR /app/RpgSaga
+
 RUN dotnet publish -c Release -o out
 
-# Build runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
-WORKDIR /app
-COPY --from=build-env /app/out .
+FROM mcr.microsoft.com/dotnet/runtime:6.0-alpine
+
+WORKDIR /app/src/RpgSaga
+
+COPY --from=build-env /app/RpgSaga/out .
+
 ENTRYPOINT ["dotnet", "RpgSaga.dll"]

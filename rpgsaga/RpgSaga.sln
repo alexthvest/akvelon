@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31112.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga", "RpgSaga\RpgSaga.csproj", "{2C694FFE-5D5A-46EB-8CB2-6927F7B463B8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{82D92535-27BE-4ADC-8C7B-318864F50DB8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga.Tests", "RpgSaga.Tests\RpgSaga.Tests.csproj", "{833B05E8-F66B-4201-93FB-AADAD99F753F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga", "src\RpgSaga\RpgSaga.csproj", "{B3C37FB3-29F5-4A87-B386-253517AB307E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3CB0B66F-F6AC-4FC2-9860-B9195C51B284}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga.Tests", "tests\RpgSaga.Tests\RpgSaga.Tests.csproj", "{2CA0549F-6A31-46C5-9AD5-2191402B9000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +17,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2C694FFE-5D5A-46EB-8CB2-6927F7B463B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C694FFE-5D5A-46EB-8CB2-6927F7B463B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C694FFE-5D5A-46EB-8CB2-6927F7B463B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C694FFE-5D5A-46EB-8CB2-6927F7B463B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{833B05E8-F66B-4201-93FB-AADAD99F753F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{833B05E8-F66B-4201-93FB-AADAD99F753F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{833B05E8-F66B-4201-93FB-AADAD99F753F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{833B05E8-F66B-4201-93FB-AADAD99F753F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3C37FB3-29F5-4A87-B386-253517AB307E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C37FB3-29F5-4A87-B386-253517AB307E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C37FB3-29F5-4A87-B386-253517AB307E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C37FB3-29F5-4A87-B386-253517AB307E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA0549F-6A31-46C5-9AD5-2191402B9000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA0549F-6A31-46C5-9AD5-2191402B9000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA0549F-6A31-46C5-9AD5-2191402B9000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA0549F-6A31-46C5-9AD5-2191402B9000}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B3C37FB3-29F5-4A87-B386-253517AB307E} = {82D92535-27BE-4ADC-8C7B-318864F50DB8}
+		{2CA0549F-6A31-46C5-9AD5-2191402B9000} = {3CB0B66F-F6AC-4FC2-9860-B9195C51B284}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {064E603C-674E-4DB9-A061-4B08C0ACD98C}
+		SolutionGuid = {140D1D4F-B8D7-4A18-BDB9-744003372EEE}
 	EndGlobalSection
 EndGlobal
