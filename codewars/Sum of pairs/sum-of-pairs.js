@@ -1,14 +1,14 @@
 function sumPairs(ints, s) {
-  const numberStorage = new Set();
+  const numberStorage = {};
 
   for (const number of ints) {
     const requiredNumber = s - number;
 
-    if (numberStorage.has(requiredNumber)) {
+    if (requiredNumber in numberStorage) {
       return [requiredNumber, number];
     }
 
-    numberStorage.add(number);
+    numberStorage[number] = 1;
   }
 
   return undefined;
