@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValidParentheses", "Valid Parentheses\ValidParentheses.csproj", "{D55EFD46-E59E-490A-8701-74FE1EF8DC4E}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeMaxSum", "Fun with tree - max sum\TreeMaxSum.csproj", "{E4D5F0E0-6099-43E2-9D97-E13F6BB6EF9B}"
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimplePigLatin", "Simple Pig Latin\SimplePigLatin.csproj", "{9018BB56-BCCD-48FF-8288-2EA9DF9FBED8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddingBigNumbers", "Adding Big Numbers\AddingBigNumbers.csproj", "{A46AD5E3-5F75-4030-8512-5D41E9B97582}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,5 +29,9 @@ Global
 		{9018BB56-BCCD-48FF-8288-2EA9DF9FBED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9018BB56-BCCD-48FF-8288-2EA9DF9FBED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9018BB56-BCCD-48FF-8288-2EA9DF9FBED8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A46AD5E3-5F75-4030-8512-5D41E9B97582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A46AD5E3-5F75-4030-8512-5D41E9B97582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A46AD5E3-5F75-4030-8512-5D41E9B97582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A46AD5E3-5F75-4030-8512-5D41E9B97582}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
