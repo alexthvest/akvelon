@@ -8,4 +8,5 @@ test:
   tags:
     - docker
   script:
+    - cd rpgsaga/
     - dotnet test -c Release
