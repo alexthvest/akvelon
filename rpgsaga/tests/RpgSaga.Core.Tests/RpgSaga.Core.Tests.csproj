@@ -6,9 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+  </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\RpgSaga\RpgSaga.csproj" />
+    <ProjectReference Include="..\..\src\RpgSaga.Core\RpgSaga.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
