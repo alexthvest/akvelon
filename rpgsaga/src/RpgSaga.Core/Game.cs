@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Logic;
+using RpgSaga.Core.Managment;
 using RpgSaga.Core.Readers;
 using RpgSaga.Core.Writers;
 
@@ -16,7 +18,13 @@ public sealed class Game
 
     public static GameBuilder CreateBuilder(string[] args)
     {
-        return new GameBuilder(args);
+        var builder = new GameBuilder(args);
+
+        // Configure services
+        builder.Services.AddSingleton<IGameLoop, GameLoop>();
+        builder.Services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
+
+        return builder;
     }
 
     public void Start()
@@ -29,6 +37,12 @@ public sealed class Game
 
         var heroesCount = reader.ReadByte();
 
-        writer.WriteLine($"Heroes: {heroesCount ?? 0}");
+        if (!heroesCount.HasValue || heroesCount < 2)
+        {
+            throw new Exception("Please enter valid number of heroes that greater or equals 2");
+        }
+
+        var gameLoop = _serviceProvider.GetRequiredService<IGameLoop>();
+        gameLoop.Start(heroesCount.Value);
     }
 }
