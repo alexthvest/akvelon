@@ -1,4 +1,4 @@
-﻿using RpgSaga.Core.Models;
+using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Abstractions;
 
