@@ -1,4 +1,9 @@
-﻿namespace RpgSaga.Core;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Logic;
+using RpgSaga.Core.Managment;
+
+namespace RpgSaga.Core;
 
 public sealed class Game
 {
@@ -11,11 +16,18 @@ public sealed class Game
 
     public static GameBuilder CreateBuilder()
     {
-        return new GameBuilder();
+        var builder = new GameBuilder();
+
+        // Configure services
+        builder.Services.AddSingleton<IGameLoop, GameLoop>();
+        builder.Services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
+
+        return builder;
     }
 
     public void Start(byte playerCount)
     {
-        Console.WriteLine(playerCount);
+        var gameLoop = _serviceProvider.GetRequiredService<IGameLoop>();
+        gameLoop.Start(playerCount);
     }
 }
