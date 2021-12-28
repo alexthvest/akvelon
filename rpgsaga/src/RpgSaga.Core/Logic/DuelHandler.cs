@@ -7,13 +7,20 @@ internal sealed class DuelHandler : IDuelHandler
 {
     public GameDuel Handle(Hero[] heroes)
     {
-        if (heroes.Length > 1)
+        if (heroes.Length == 0)
         {
-            Console.WriteLine($">>> {heroes[0].Name} vs {heroes[1].Name}");
+            throw new ArgumentOutOfRangeException("Pair must consists of one or two heroes");
         }
 
-        var winner = heroes[Random.Shared.Next(0, heroes.Length)];
+        if (heroes.Length == 1)
+        {
+            return new GameDuel(heroes, heroes[0]);
+        }
 
-        return new GameDuel(heroes, winner);
+        Console.WriteLine($">>> {heroes[0]} vs {heroes[1]}");
+
+        var winner = heroes.MaxBy(p => p.Health + p.Attack);
+
+        return new GameDuel(heroes, winner!);
     }
 }

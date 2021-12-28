@@ -24,12 +24,15 @@ internal sealed class GameLoop : IGameLoop
             if (round.Winners.Length == 1)
             {
                 var winner = round.Winners[0];
-                Console.WriteLine(winner.Name);
+
+                Console.WriteLine();
+                Console.WriteLine($"👑 Winner: {winner}");
 
                 break;
             }
 
             heroes = round.Winners;
+            Console.WriteLine();
         } 
     }
 }
