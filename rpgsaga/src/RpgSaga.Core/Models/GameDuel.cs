@@ -2,7 +2,7 @@
 
 namespace RpgSaga.Core.Models;
 
-internal sealed record GameDuel
+internal sealed class GameDuel
 {
     public GameDuel(IEnumerable<Hero> pair, Hero winner)
     {
