@@ -1,0 +1,2 @@
+include:
+  - local: rpgsaga/.gitlab-ci.yml

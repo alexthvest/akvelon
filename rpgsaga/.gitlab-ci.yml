@@ -1,0 +1,12 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - test
+
+test:
+  stage: test
+  tags:
+    - docker
+  script:
+    - cd rpgsaga/
+    - dotnet test -c Release
