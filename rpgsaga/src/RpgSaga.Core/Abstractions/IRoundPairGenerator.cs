@@ -1,6 +1,8 @@
-﻿namespace RpgSaga.Core.Abstractions;
+﻿using RpgSaga.Core.Models;
+
+namespace RpgSaga.Core.Abstractions;
 
 internal interface IRoundPairGenerator
 {
-    IEnumerable<IEnumerable<Hero>> Generate(IEnumerable<Hero> heroes);
+    IEnumerable<Hero[]> Generate(IEnumerable<Hero> heroes);
 }

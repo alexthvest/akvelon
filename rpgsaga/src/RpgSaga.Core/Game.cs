@@ -2,6 +2,7 @@
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
+using RpgSaga.Core.Models;
 using RpgSaga.Core.Readers;
 using RpgSaga.Core.Writers;
 
@@ -42,7 +43,9 @@ public sealed class Game
             throw new Exception("Please enter valid number of heroes that greater or equals 2");
         }
 
+        var heroes = Enumerable.Range(0, heroesCount.Value).Select(i => new Hero($"Hero #{i}"));
+
         var gameLoop = _serviceProvider.GetRequiredService<IGameLoop>();
-        gameLoop.Start(heroesCount.Value);
+        gameLoop.Start(heroes);
     }
 }
