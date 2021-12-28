@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
-using RpgSaga.Core.Models;
 using RpgSaga.Core.Readers;
 
 namespace RpgSaga.Core;
@@ -15,6 +14,8 @@ public sealed class Game
         _serviceProvider = serviceProvider;
     }
 
+    public IHeroStorage Heroes => _serviceProvider.GetRequiredService<IHeroStorage>();
+
     public static GameBuilder CreateBuilder(string[] args)
     {
         return new GameBuilder(args);
@@ -22,6 +23,7 @@ public sealed class Game
 
     public void Start()
     {
+        var randomHeroGenerator = _serviceProvider.GetRequiredService<IRandomHeroGenerator>();
         var commandLineArgsAccessor = _serviceProvider.GetRequiredService<CommandLineArgsAccessor>();
         var commandLineArgs = commandLineArgsAccessor.Args;
 
@@ -39,7 +41,7 @@ public sealed class Game
             throw new ArgumentOutOfRangeException("Please enter valid number of heroes that greater or equals 2");
         }
 
-        var heroes = Enumerable.Range(0, heroesCount.Value).Select(i => new Hero($"Hero #{i}"));
+        var heroes = Enumerable.Range(0, heroesCount.Value).Select(_ => randomHeroGenerator.Generate());
 
         var gameLoop = ActivatorUtilities.CreateInstance<GameLoop>(_serviceProvider);
         gameLoop.Start(heroes);
