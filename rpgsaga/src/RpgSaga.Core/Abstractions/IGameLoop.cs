@@ -1,6 +1,8 @@
-﻿namespace RpgSaga.Core.Abstractions;
+﻿using RpgSaga.Core.Models;
+
+namespace RpgSaga.Core.Abstractions;
 
 internal interface IGameLoop
 {
-    void Start(byte playerCount);
+    void Start(IEnumerable<Hero> heroes);
 }
