@@ -27,7 +27,9 @@ internal sealed class GameLoop
             if (round.Winners.Length == 1)
             {
                 var winner = round.Winners[0];
-                _writer.WriteLine(winner.Name);
+
+                _writer.WriteLine(string.Empty);
+                _writer.WriteLine($"👑 Winner: {winner}");
 
                 break;
             }

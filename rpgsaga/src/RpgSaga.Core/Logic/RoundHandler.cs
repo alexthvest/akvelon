@@ -20,7 +20,6 @@ internal sealed class RoundHandler : IRoundHandler
         _writer.WriteLine("=== Round ===");
 
         var duels = pairs.Select(p => _duelHandler.Handle(p));
-
         return new GameRound(duels);
     }
 }

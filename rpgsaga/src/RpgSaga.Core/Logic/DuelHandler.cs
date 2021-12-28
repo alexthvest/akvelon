@@ -20,13 +20,20 @@ internal sealed class DuelHandler : IDuelHandler
     /// <returns>Result of battle containing heroes and winner of the duel.</returns>
     public GameDuel Handle(Hero[] heroes)
     {
-        if (heroes.Length > 1)
+        if (heroes.Length == 0)
         {
-            _writer.WriteLine($">>> {heroes[0].Name} vs {heroes[1].Name}");
+            throw new ArgumentOutOfRangeException("Pair must consists of one or two heroes");
         }
 
-        var winner = heroes[Random.Shared.Next(0, heroes.Length)];
+        if (heroes.Length == 1)
+        {
+            return new GameDuel(heroes, heroes[0]);
+        }
 
-        return new GameDuel(heroes, winner);
+        _writer.WriteLine($">>> {heroes[0]} vs {heroes[1]}");
+
+        var winner = heroes.MaxBy(p => p.Health + p.Attack);
+
+        return new GameDuel(heroes, winner!);
     }
 }
