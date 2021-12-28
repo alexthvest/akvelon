@@ -1,19 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\RpgSaga.Core\RpgSaga.Core.csproj" />
-    <ProjectReference Include="..\RpgSaga.DLCs\RpgSaga.DLCs.csproj" />
   </ItemGroup>
 
 </Project>
