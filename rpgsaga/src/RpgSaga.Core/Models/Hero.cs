@@ -1,4 +1,4 @@
-﻿namespace RpgSaga.Core;
+﻿namespace RpgSaga.Core.Models;
 
 public class Hero
 {

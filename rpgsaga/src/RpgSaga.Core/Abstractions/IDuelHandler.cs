@@ -2,7 +2,7 @@
 
 namespace RpgSaga.Core.Abstractions;
 
-internal interface IGameLoop
+internal interface IDuelHandler
 {
-    void Start(IEnumerable<Hero> heroes);
+    GameDuel Handle(Hero[] heroes);
 }

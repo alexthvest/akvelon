@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RpgSaga.Core.Extensions;
 
 namespace RpgSaga.Core;
 
@@ -10,7 +11,10 @@ public sealed class GameBuilder
 
     public Game Build()
     {
-        var serviceProvider = _services.BuildServiceProvider();
+        var serviceProvider = _services
+            .AddRpgSagaCore()
+            .BuildServiceProvider();
+
         return new Game(serviceProvider);
     }
 }

@@ -1,26 +1,35 @@
 ﻿using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Logic;
 
 internal sealed class GameLoop : IGameLoop
 {
     private readonly IRoundPairGenerator _roundPairGenerator;
+    private readonly IRoundHandler _roundHandler;
 
-    public GameLoop(IRoundPairGenerator roundPairGenerator)
+    public GameLoop(IRoundPairGenerator roundPairGenerator, IRoundHandler roundHandler)
     {
         _roundPairGenerator = roundPairGenerator;
+        _roundHandler = roundHandler;
     }
 
-    public void Start(byte playerCount)
+    public void Start(IEnumerable<Hero> heroes)
     {
-        var heroes = Enumerable.Range(0, playerCount).Select(i => new Hero($"Hero #{i}"));
-        var pairs = _roundPairGenerator.Generate(heroes);
-
-        foreach (var pair in pairs)
+        while (true)
         {
-            Console.Write("@Pair [ ");
-            Console.Write(string.Join(", ", pair.Select(p => p.Name)));
-            Console.WriteLine(" ]");
-        }
+            var pairs = _roundPairGenerator.Generate(heroes);
+            var round = _roundHandler.Handle(pairs);
+
+            if (round.Winners.Length == 1)
+            {
+                var winner = round.Winners[0];
+                Console.WriteLine(winner.Name);
+
+                break;
+            }
+
+            heroes = round.Winners;
+        } 
     }
 }
