@@ -3,6 +3,7 @@ using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
 using RpgSaga.Core.Storages;
+using Serilog;
 
 namespace RpgSaga.Core.Extensions;
 
@@ -10,6 +11,13 @@ internal static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddRpgSagaCore(this IServiceCollection services)
     {
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.Console()
+            .WriteTo.File($"logs/rpgsaga-{DateTime.Now:yyyyMMdd}.log")
+            .CreateLogger();
+
+        services.AddLogging(c => c.AddSerilog());
+
         services.AddSingleton<IGameLoop, GameLoop>();
         services.AddSingleton<IRoundHandler, RoundHandler>();
         services.AddSingleton<IDuelHandler, DuelHandler>();

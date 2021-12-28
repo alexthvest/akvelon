@@ -1,10 +1,18 @@
-﻿using RpgSaga.Core.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Logic;
 
 internal sealed class DuelHandler : IDuelHandler
 {
+    private readonly ILogger _logger;
+
+    public DuelHandler(ILogger<DuelHandler> logger)
+    {
+        _logger = logger;
+    }
+
     public GameDuel Handle(Hero[] heroes)
     {
         if (heroes.Length == 0)
@@ -17,7 +25,7 @@ internal sealed class DuelHandler : IDuelHandler
             return new GameDuel(heroes, heroes[0]);
         }
 
-        Console.WriteLine($">>> {heroes[0]} vs {heroes[1]}");
+        _logger.LogInformation(">>> {0} vs {1}", heroes[0], heroes[1]);
 
         var winner = heroes.MaxBy(p => p.Health + p.Attack);
 
