@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RpgSaga.Core.Abstractions;
-using RpgSaga.Core.Extensions;
 
 namespace RpgSaga.Core;
 
