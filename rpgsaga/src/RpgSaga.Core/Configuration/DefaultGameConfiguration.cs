@@ -1,6 +1,6 @@
 ﻿using RpgSaga.Core.Heroes;
 
-namespace RpgSaga.Core.Extensions;
+namespace RpgSaga.Core;
 
 internal static class DefaultGameConfiguration
 {
