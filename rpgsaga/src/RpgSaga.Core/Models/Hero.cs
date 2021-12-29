@@ -2,7 +2,7 @@
 
 public abstract class Hero
 {
-    public Hero(string firstName, string lastName, double health, double attack)
+    public Hero(string firstName, string lastName, decimal health, decimal attack)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -14,9 +14,9 @@ public abstract class Hero
 
     public string LastName { get; }
 
-    public double Health { get; }
+    public decimal Health { get; }
 
-    public double Attack { get; }
+    public decimal Attack { get; }
 
     public override string ToString()
     {
