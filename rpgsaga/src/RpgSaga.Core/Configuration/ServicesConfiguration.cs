@@ -4,7 +4,7 @@ using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
 using RpgSaga.Core.Storages;
 
-namespace RpgSaga.Core.Extensions;
+namespace RpgSaga.Core;
 
 internal static class ServicesConfiguration
 {

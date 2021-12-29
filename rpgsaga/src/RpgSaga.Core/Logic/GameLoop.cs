@@ -32,6 +32,7 @@ internal sealed class GameLoop
             }
 
             heroes = round.Winners;
+            Console.WriteLine();
         }
     }
 }
