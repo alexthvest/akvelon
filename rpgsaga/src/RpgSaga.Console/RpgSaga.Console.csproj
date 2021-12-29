@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RpgSaga.Core\RpgSaga.Core.csproj" />
-    <ProjectReference Include="..\RpgSaga.DLCs\RpgSaga.DLCs.csproj" />
   </ItemGroup>
 
 </Project>

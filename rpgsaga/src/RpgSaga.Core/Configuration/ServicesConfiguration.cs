@@ -6,10 +6,12 @@ using RpgSaga.Core.Storages;
 
 namespace RpgSaga.Core.Extensions;
 
-internal static class ServiceCollectionExtensions
+internal static class ServicesConfiguration
 {
     public static IServiceCollection AddRpgSagaCore(this IServiceCollection services)
     {
+        services.AddSingleton<GameConfiguration>();
+
         services.AddSingleton<IGameLoop, GameLoop>();
         services.AddSingleton<IRoundHandler, RoundHandler>();
         services.AddSingleton<IDuelHandler, DuelHandler>();
@@ -19,7 +21,7 @@ internal static class ServiceCollectionExtensions
         services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
         services.AddSingleton<IRandomNameGenerator, RandomNameGenerator>();
         services.AddSingleton<IRandomHeroGenerator, RandomHeroGenerator>();
-
+        
         return services;
     }
 }

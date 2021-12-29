@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Extensions;
 
 namespace RpgSaga.Core;
 
@@ -14,9 +15,9 @@ public sealed class Game
 
     public IHeroStorage Heroes => _serviceProvider.GetRequiredService<IHeroStorage>();
 
-    public static GameBuilder CreateBuilder()
+    public static GameBuilder CreateBuilder(Action<GameConfiguration>? configure = default)
     {
-        return new GameBuilder();
+        return new GameBuilder(configure);
     }
 
     public void Start(byte playerCount)
