@@ -13,7 +13,7 @@ internal static class ServiceCollectionExtensions
     {
         Log.Logger = new LoggerConfiguration()
             .WriteTo.Console()
-            .WriteTo.File($"logs/rpgsaga-{DateTime.Now:yyyyMMdd}.log")
+            .WriteTo.File($"logs/rpgsaga-.log", rollingInterval: RollingInterval.Day)
             .CreateLogger();
 
         services.AddLogging(c => c.AddSerilog());
