@@ -5,15 +5,13 @@ VisualStudioVersion = 17.0.32002.185
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D74E2EE0-69C6-4030-AA61-FE63A21435A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgSaga.Console", "src\RpgSaga.Console\RpgSaga.Console.csproj", "{F6594A10-E446-4550-BBE3-4D92CD4B7136}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga.Console", "src\RpgSaga.Console\RpgSaga.Console.csproj", "{F6594A10-E446-4550-BBE3-4D92CD4B7136}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3F2D8899-1935-48EF-954D-0820B8227BC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgSaga.Core.Tests", "tests\RpgSaga.Core.Tests\RpgSaga.Core.Tests.csproj", "{715321E1-1A76-425D-9ADF-243E66E88A34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga.Core.Tests", "tests\RpgSaga.Core.Tests\RpgSaga.Core.Tests.csproj", "{715321E1-1A76-425D-9ADF-243E66E88A34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgSaga.Core", "src\RpgSaga.Core\RpgSaga.Core.csproj", "{9FBD76CF-8C66-49F8-A59A-1C6A7905EA11}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpgSaga.DLCs", "src\RpgSaga.DLCs\RpgSaga.DLCs.csproj", "{56D5CF41-D286-412D-8903-5CB5DF8E0A6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RpgSaga.Core", "src\RpgSaga.Core\RpgSaga.Core.csproj", "{9FBD76CF-8C66-49F8-A59A-1C6A7905EA11}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,21 +31,16 @@ Global
 		{9FBD76CF-8C66-49F8-A59A-1C6A7905EA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FBD76CF-8C66-49F8-A59A-1C6A7905EA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FBD76CF-8C66-49F8-A59A-1C6A7905EA11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56D5CF41-D286-412D-8903-5CB5DF8E0A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56D5CF41-D286-412D-8903-5CB5DF8E0A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56D5CF41-D286-412D-8903-5CB5DF8E0A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56D5CF41-D286-412D-8903-5CB5DF8E0A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {140D1D4F-B8D7-4A18-BDB9-744003372EEE}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F6594A10-E446-4550-BBE3-4D92CD4B7136} = {D74E2EE0-69C6-4030-AA61-FE63A21435A0}
 		{715321E1-1A76-425D-9ADF-243E66E88A34} = {3F2D8899-1935-48EF-954D-0820B8227BC7}
 		{9FBD76CF-8C66-49F8-A59A-1C6A7905EA11} = {D74E2EE0-69C6-4030-AA61-FE63A21435A0}
-		{56D5CF41-D286-412D-8903-5CB5DF8E0A6C} = {D74E2EE0-69C6-4030-AA61-FE63A21435A0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {140D1D4F-B8D7-4A18-BDB9-744003372EEE}
 	EndGlobalSection
 EndGlobal

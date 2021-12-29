@@ -1,6 +1,6 @@
 ﻿using RpgSaga.Core.Models;
 
-namespace RpgSaga.DLCs.Rogue.Heroes;
+namespace RpgSaga.Core.Heroes;
 
 public sealed class Mage : Hero
 {
