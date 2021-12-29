@@ -2,17 +2,14 @@
 
 public abstract class Hero
 {
-    public Hero(string firstName, string lastName, decimal health, decimal attack)
+    public Hero(HeroName name, decimal health, decimal attack)
     {
-        FirstName = firstName;
-        LastName = lastName;
+        Name = name;
         Health = health;
         Attack = attack;
     }
 
-    public string FirstName { get; }
-
-    public string LastName { get; }
+    public HeroName Name { get; }
 
     public decimal Health { get; }
 
@@ -21,7 +18,7 @@ public abstract class Hero
     public override string ToString()
     {
         var role = GetType().Name;
-        var name = $"{FirstName} {LastName}";
+        var name = $"{Name.FirstName} {Name.LastName}";
 
         return $"{name} ({role})";
     }
