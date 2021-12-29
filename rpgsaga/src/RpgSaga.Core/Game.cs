@@ -16,9 +16,9 @@ public sealed class Game
 
     public IHeroStorage Heroes => _serviceProvider.GetRequiredService<IHeroStorage>();
 
-    public static GameBuilder CreateBuilder(string[] args)
+    public static GameBuilder CreateBuilder(string[] args, Action<GameConfiguration>? configure = default)
     {
-        return new GameBuilder(args);
+        return new GameBuilder(args, configure);
     }
 
     public void Start()

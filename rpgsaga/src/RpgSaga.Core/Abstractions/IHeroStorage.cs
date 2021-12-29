@@ -6,7 +6,7 @@ public interface IHeroStorage
 {
     ImmutableArray<string> Heroes { get; }
 
-    void Add<T>(HeroFactory factory);
+    void Add<T>(HeroFactory heroFactory);
 
     HeroFactory? GetHeroFactory(string heroType);
 }

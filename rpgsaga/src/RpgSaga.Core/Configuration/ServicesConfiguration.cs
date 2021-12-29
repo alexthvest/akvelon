@@ -6,10 +6,12 @@ using RpgSaga.Core.Storages;
 
 namespace RpgSaga.Core.Extensions;
 
-internal static class ServiceCollectionExtensions
+internal static class ServicesConfiguration
 {
     public static IServiceCollection AddRpgSagaCore(this IServiceCollection services)
     {
+        services.AddSingleton<GameConfiguration>();
+
         services.AddSingleton<IRoundHandler, RoundHandler>();
         services.AddSingleton<IDuelHandler, DuelHandler>();
 
