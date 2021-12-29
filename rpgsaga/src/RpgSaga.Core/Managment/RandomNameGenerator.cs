@@ -1,5 +1,6 @@
 ﻿using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Extensions;
+using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Managment;
 
@@ -35,11 +36,11 @@ internal sealed class RandomNameGenerator : IRandomNameGenerator
         "Cinnamon",
     };
 
-    public (string FirstName, string LastName) Generate()
+    public HeroName Generate()
     {
         var firstName = _firstNames.GetRandomValue();
         var lastName = _lastNames.GetRandomValue();
 
-        return (firstName, lastName);
+        return new HeroName(firstName, lastName);
     }
 }

@@ -25,11 +25,11 @@ internal sealed class RandomHeroGenerator : IRandomHeroGenerator
             throw new KeyNotFoundException($"Hero '{heroType}' is not registered in storage");
         }
 
-        var (firstName, lastName) = _randomNameGenerator.Generate();
+        var name = _randomNameGenerator.Generate();
 
         var health = Random.Shared.Next(10, 120);
         var attack = Random.Shared.Next(health / 10, health);
 
-        return heroFactory.Invoke(firstName, lastName, health, attack);
+        return heroFactory.Invoke(name, health, attack);
     }
 }
