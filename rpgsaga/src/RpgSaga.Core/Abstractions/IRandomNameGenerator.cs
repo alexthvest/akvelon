@@ -1,6 +1,8 @@
-﻿namespace RpgSaga.Core.Abstractions;
+﻿using RpgSaga.Core.Models;
+
+namespace RpgSaga.Core.Abstractions;
 
 internal interface IRandomNameGenerator
 {
-    (string FirstName, string LastName) Generate();
+   HeroName Generate();
 }

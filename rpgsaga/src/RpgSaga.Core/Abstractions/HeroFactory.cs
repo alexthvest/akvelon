@@ -2,4 +2,4 @@
 
 namespace RpgSaga.Core.Abstractions;
 
-public delegate Hero HeroFactory(string firstName, string lastName, decimal health, decimal attack);
+public delegate Hero HeroFactory(HeroName name, decimal health, decimal attack);
