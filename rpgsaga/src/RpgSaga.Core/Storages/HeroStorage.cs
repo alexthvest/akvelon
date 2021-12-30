@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using RpgSaga.Core.Abstractions;
+﻿using RpgSaga.Core.Abstractions;
 
 namespace RpgSaga.Core.Storages;
 
@@ -7,7 +6,7 @@ internal sealed class HeroStorage : IHeroStorage
 {
     private readonly Dictionary<string, HeroFactory> _heroFactories = new ();
 
-    public ImmutableArray<string> Heroes => _heroFactories.Keys.ToImmutableArray();
+    public IReadOnlyCollection<string> Heroes => _heroFactories.Keys;
 
     public void Add<T>(HeroFactory heroFactory)
     {
