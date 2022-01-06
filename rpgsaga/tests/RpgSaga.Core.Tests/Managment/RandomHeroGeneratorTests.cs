@@ -10,7 +10,7 @@ namespace RpgSaga.Core.Tests.Managment;
 public sealed class RandomHeroGeneratorTests
 {
     [Fact]
-    public void Should_Return_Specific_Hero_Instance()
+    public void ShouldReturn_SpecificHeroInstance_ByHeroName()
     {
         // Arrange
         var randomNameGeneratorMock = Mock.Of<IRandomNameGenerator>();
