@@ -16,10 +16,15 @@ internal static class ServicesConfiguration
         services.AddSingleton<IDuelHandler, DuelHandler>();
 
         services.AddSingleton<IHeroStorage, HeroStorage>();
+        services.AddSingleton<IAbilityStorage, AbilityStorage>();
+        services.AddSingleton<IAbilityDispatcher, AbilityDispatcher>();
 
         services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
         services.AddSingleton<IRandomNameGenerator, RandomNameGenerator>();
         services.AddSingleton<IRandomHeroGenerator, RandomHeroGenerator>();
+
+        services.AddSingleton<ITurnManagerFactory, TurnManagerFactory>();
+        services.AddSingleton<ITurnManager, TurnManager>();
 
         return services;
     }
