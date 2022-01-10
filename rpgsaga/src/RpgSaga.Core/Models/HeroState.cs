@@ -16,7 +16,7 @@ internal class HeroState
 
     public static implicit operator Hero(HeroState heroState) => heroState.Hero;
 
-    public void DealDamange(decimal damage)
+    public void DealDamage(decimal damage)
     {
         Health -= damage;
 

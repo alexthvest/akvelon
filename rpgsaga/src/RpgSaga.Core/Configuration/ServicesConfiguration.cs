@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RpgSaga.Core.AbilityResults;
+using RpgSaga.Core.AbilityResults.Damage;
+using RpgSaga.Core.AbilityResults.Effect;
+using RpgSaga.Core.AbilityResults.SkipTurn;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
@@ -24,7 +28,12 @@ internal static class ServicesConfiguration
         services.AddSingleton<IRandomHeroGenerator, RandomHeroGenerator>();
 
         services.AddSingleton<ITurnManagerFactory, TurnManagerFactory>();
-        services.AddSingleton<ITurnManager, TurnManager>();
+
+        services.AddSingleton<IAbilityResultHandler, AbilityResultHandler>();
+
+        services.AddSingleton<IAbilityResultHandler<DamageAbilityResult>, DamangeAbilityResultHandler>();
+        services.AddSingleton<IAbilityResultHandler<SkipTurnAbilityResult>, SkipTurnAbilityResultHandler>();
+        services.AddSingleton<IAbilityResultHandler<EffectAbilityResult>, EffectAbilityResultHandler>();
 
         return services;
     }

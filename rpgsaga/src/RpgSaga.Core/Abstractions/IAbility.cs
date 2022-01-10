@@ -2,4 +2,5 @@
 
 public interface IAbility
 {
+    int? Usages { get; }
 }
