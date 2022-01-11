@@ -1,5 +1,6 @@
 ﻿using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
+using RpgSaga.Core.Writers;
 
 namespace RpgSaga.Core.Logic;
 
@@ -7,11 +8,13 @@ internal sealed class GameLoop
 {
     private readonly IRoundPairGenerator _roundPairGenerator;
     private readonly IRoundHandler _roundHandler;
+    private readonly IWriter _writer;
 
     public GameLoop(IRoundPairGenerator roundPairGenerator, IRoundHandler roundHandler)
     {
         _roundPairGenerator = roundPairGenerator;
         _roundHandler = roundHandler;
+        _writer = new ConsoleWriter();
     }
 
     public void Start(IEnumerable<Hero> heroes)
@@ -24,7 +27,7 @@ internal sealed class GameLoop
             if (round.Winners.Length == 1)
             {
                 var winner = round.Winners[0];
-                Console.WriteLine(winner.Name);
+                _writer.WriteLine(winner.Name);
 
                 break;
             }
