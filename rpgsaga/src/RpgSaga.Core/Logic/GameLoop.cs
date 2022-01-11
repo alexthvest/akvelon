@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 using RpgSaga.Core.Writers;
@@ -36,11 +36,12 @@ internal sealed class GameLoop
                 _writer.WriteLine(string.Empty);
                 _writer.WriteLine($"👑 Winner: {winner}");
 
-                _logger.LogInformation("Winner of the battle: {Winner}", winner);
+                _logger.LogInformation("Winner of the battle: {@Winner}", winner);
                 break;
             }
 
             heroes = round.Winners;
+
             _writer.WriteLine(string.Empty);
         }
     }

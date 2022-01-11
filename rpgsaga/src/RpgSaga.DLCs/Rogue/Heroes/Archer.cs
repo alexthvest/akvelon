@@ -4,13 +4,13 @@ namespace RpgSaga.DLCs.Rogue.Heroes;
 
 public sealed class Archer : Hero
 {
-    public Archer(string firstName, string lastName, double health, double attack) 
-        : base(firstName, lastName, health, attack)
+    public Archer(HeroName name, decimal health, decimal attack)
+        : base(name, health, attack)
     {
     }
 
-    public static Archer Create(string firstName, string lastName, double health, double attack)
+    public static Archer Create(HeroName name, decimal health, decimal attack)
     {
-        return new Archer(firstName, lastName, health, attack);
+        return new Archer(name, health, attack);
     }
 }

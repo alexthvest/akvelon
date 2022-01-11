@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 using RpgSaga.Core.Writers;
@@ -34,7 +34,7 @@ internal sealed class DuelHandler : IDuelHandler
         }
 
         _writer.WriteLine($">>> {heroes[0]} vs {heroes[1]}");
-        _logger.LogInformation("Duel between two heroes begin: {Heroes}", heroes);
+        _logger.LogInformation("Duel between two heroes begin: {@Heroes}", heroes);
 
         var winner = heroes.MaxBy(p => p.Health + p.Attack);
 
