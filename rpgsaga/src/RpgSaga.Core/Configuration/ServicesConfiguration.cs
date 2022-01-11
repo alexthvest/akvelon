@@ -5,9 +5,9 @@ using RpgSaga.Core.Managment;
 using RpgSaga.Core.Storages;
 using Serilog;
 
-namespace RpgSaga.Core.Extensions;
+namespace RpgSaga.Core;
 
-internal static class ServiceCollectionExtensions
+internal static class ServicesConfiguration
 {
     public static IServiceCollection AddRpgSagaCore(this IServiceCollection services)
     {
@@ -18,7 +18,8 @@ internal static class ServiceCollectionExtensions
 
         services.AddLogging(c => c.AddSerilog());
 
-        services.AddSingleton<IGameLoop, GameLoop>();
+        services.AddSingleton<GameConfiguration>();
+
         services.AddSingleton<IRoundHandler, RoundHandler>();
         services.AddSingleton<IDuelHandler, DuelHandler>();
 

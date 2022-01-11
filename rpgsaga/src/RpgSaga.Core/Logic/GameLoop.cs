@@ -1,12 +1,13 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Logic;
 
-internal sealed class GameLoop : IGameLoop
+internal sealed class GameLoop
 {
     private readonly ILogger _logger;
+
     private readonly IRoundPairGenerator _roundPairGenerator;
     private readonly IRoundHandler _roundHandler;
 
@@ -31,11 +32,10 @@ internal sealed class GameLoop : IGameLoop
                 var winner = round.Winners[0];
 
                 _logger.LogInformation("👑 Winner: {Winner}", winner);
-
                 break;
             }
 
             heroes = round.Winners;
-        } 
+        }
     }
 }

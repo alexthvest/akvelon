@@ -9,9 +9,9 @@ internal sealed class HeroStorage : IHeroStorage
 
     public ImmutableArray<string> Heroes => _heroFactories.Keys.ToImmutableArray();
 
-    public void Add<T>(HeroFactory factory)
+    public void Add<T>(HeroFactory heroFactory)
     {
-        _heroFactories[typeof(T).Name] = factory;
+        _heroFactories[typeof(T).Name] = heroFactory;
     }
 
     public HeroFactory? GetHeroFactory(string heroType)
