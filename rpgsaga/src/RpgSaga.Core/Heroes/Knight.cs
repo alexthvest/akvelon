@@ -4,7 +4,7 @@ namespace RpgSaga.Core.Heroes;
 
 internal sealed class Knight : Hero
 {
-    public Knight(HeroName name, decimal health, decimal attack) 
+    public Knight(HeroName name, decimal health, decimal attack)
         : base(name, health, attack)
     {
     }

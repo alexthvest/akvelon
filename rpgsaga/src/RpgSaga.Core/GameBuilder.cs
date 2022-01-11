@@ -1,14 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RpgSaga.Core.Abstractions;
 
 namespace RpgSaga.Core;
 
 public sealed class GameBuilder
 {
+    private readonly string[] _args;
     private readonly Action<GameConfiguration>? _configure;
     private readonly ServiceCollection _services = new ();
 
-    public GameBuilder(Action<GameConfiguration>? configure = default)
+    public GameBuilder(string[] args, Action<GameConfiguration>? configure = default)
     {
+        _args = args;
         _configure = configure;
     }
 
@@ -16,6 +19,8 @@ public sealed class GameBuilder
 
     public Game Build()
     {
+        _services.AddSingleton(new CommandLineArgsAccessor(_args));
+
         var serviceProvider = _services
             .AddRpgSagaCore()
             .BuildServiceProvider();

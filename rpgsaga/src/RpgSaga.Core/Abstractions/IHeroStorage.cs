@@ -1,4 +1,4 @@
-﻿namespace RpgSaga.Core.Abstractions;
+namespace RpgSaga.Core.Abstractions;
 
 public interface IHeroStorage
 {

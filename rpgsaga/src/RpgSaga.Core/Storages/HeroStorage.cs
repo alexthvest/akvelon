@@ -1,4 +1,4 @@
-﻿using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Abstractions;
 
 namespace RpgSaga.Core.Storages;
 
