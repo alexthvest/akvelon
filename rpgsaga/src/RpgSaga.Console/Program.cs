@@ -1,4 +1,5 @@
 ﻿using RpgSaga.Core;
+using RpgSaga.DLCs.Rogue.Heroes;
 
 namespace RpgSaga.Console;
 
