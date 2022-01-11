@@ -1,17 +1,14 @@
-﻿using System.Reflection;
-using RpgSaga.Core;
+﻿using RpgSaga.Core;
 
-namespace RpgSaga;
+namespace RpgSaga.Console;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
-        var hero = new Hero("Guitar");
-        var assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version;
+        var gameBuilder = Game.CreateBuilder(args);
+        var game = gameBuilder.Build();
 
-        Console.WriteLine($"Hello, {hero.Name}!");
-        Console.WriteLine();
-        Console.WriteLine($"AssemblyVersion: {assemblyVersion}");
+        game.Start();
     }
 }
