@@ -2,15 +2,25 @@
 
 internal class HeroState
 {
+    private readonly DuelAbility[] _abilities;
+
     public HeroState(Hero hero)
     {
         Hero = hero;
         Health = hero.Health;
+
+        _abilities = hero.Abilities
+            .Select(ability => new DuelAbility(ability))
+            .ToArray();
     }
 
     public Hero Hero { get; }
 
     public decimal Health { get; private set; }
+
+    public IReadOnlyCollection<DuelAbility> Abilities => _abilities
+        .Where(ability => ability.Usages > 0 || ability.Infinite)
+        .ToArray();
 
     public bool IsDead => Health <= 0;
 

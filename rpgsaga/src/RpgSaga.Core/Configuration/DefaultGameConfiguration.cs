@@ -1,6 +1,7 @@
 ﻿using RpgSaga.Core.Abilities.Bewitchment;
 using RpgSaga.Core.Abilities.FireArrows;
 using RpgSaga.Core.Abilities.Nemesis;
+using RpgSaga.Core.Effects.Fire;
 using RpgSaga.Core.Heroes;
 
 namespace RpgSaga.Core;
@@ -16,5 +17,7 @@ internal static class DefaultGameConfiguration
         configuration.AddAbility<BewitchmentAbility, BewitchmentAbilityHandler>();
         configuration.AddAbility<FireArrowsAbility, FireArrowsAbilityHandler>();
         configuration.AddAbility<NemesisAbility, NemesisAbilityHandler>();
+
+        configuration.AddEffect<FireEffect, FireEffectHandler>();
     }
 }

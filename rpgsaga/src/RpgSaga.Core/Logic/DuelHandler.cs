@@ -10,11 +10,17 @@ internal class DuelHandler : IDuelHandler
     private readonly ITurnManagerFactory _turnManagerFactory;
     private readonly IAbilityDispatcher _abilityDispatcher;
     private readonly IAbilityResultHandler _abilityResultHandler;
+    private readonly IEffectDispatcher _effectDispatcher;
 
-    public DuelHandler(ITurnManagerFactory turnManagerFactory, IAbilityDispatcher abilityDispatcher, IAbilityResultHandler abilityResultHandler)
+    public DuelHandler(
+        ITurnManagerFactory turnManagerFactory,
+        IAbilityDispatcher abilityDispatcher,
+        IEffectDispatcher effectDispatcher,
+        IAbilityResultHandler abilityResultHandler)
     {
         _turnManagerFactory = turnManagerFactory;
         _abilityDispatcher = abilityDispatcher;
+        _effectDispatcher = effectDispatcher;
         _abilityResultHandler = abilityResultHandler;
     }
 
@@ -44,29 +50,25 @@ internal class DuelHandler : IDuelHandler
 
             internalContext = internalContext with { Owner = owner, Target = target };
 
-            foreach (var duelEffect in internalContext.Effects.ToList())
-            {
-                if (duelEffect.Usages == 0)
-                {
-                    internalContext.RemoveEffect(duelEffect);
-                    continue;
-                }
+            ApplyEffects(heroStates, internalContext);
 
-                Console.WriteLine(duelEffect.Effect.GetType().Name);
-                duelEffect.Usages--;
-            }
-
+            // Default action is basic hero attack
             IAbilityResult abilityResult = AbilityResult.FromDamage(owner.Hero.Attack);
 
             // Dispatch ability with 35% chance
-            if (owner.Hero.Abilities.Count > 0 && Random.Shared.Next(0, 100) < 35)
+            if (owner.Abilities.Any() && Random.Shared.Next(0, 100) <= 35)
             {
+                var duelAbility = owner.Abilities.GetRandomValue();
+
+                var ability = duelAbility.Ability;
+                var abilityName = ability.GetType().Name.Replace("Ability", string.Empty);
+
                 var context = new DuelContext(owner, target, internalContext.Effects);
-                var abilityType = owner.Hero.Abilities.GetRandomValue();
 
-                abilityResult = _abilityDispatcher.Dispatch(abilityType, context);
+                abilityResult = _abilityDispatcher.Dispatch(ability, context);
+                duelAbility.RegisterUse();
 
-                Console.WriteLine($"{owner} uses {abilityType.Name.Replace("Ability", string.Empty)}");
+                Console.WriteLine($"{owner} uses {abilityName}");
             }
 
             _abilityResultHandler.Handle(abilityResult, internalContext);
@@ -80,10 +82,29 @@ internal class DuelHandler : IDuelHandler
             if (internalContext.NextTurnRequested)
             {
                 turnManager.NextTurn();
-                internalContext.NextTurnRequested = false;
+                internalContext.CancelNextTurnRequest();
             }
 
             turnManager.NextTurn();
+        }
+    }
+
+    private void ApplyEffects(HeroState[] heroStates, InternalDuelContext internalContext)
+    {
+        foreach (var duelEffect in internalContext.Effects)
+        {
+            var (_, owner, target, _) = duelEffect;
+
+            var ownerState = heroStates.First(s => s.Hero == owner);
+            var targetState = heroStates.First(s => s.Hero == target);
+
+            var context = new DuelContext(owner, target, internalContext.Effects);
+            var effectInternalContext = internalContext with { Owner = ownerState, Target = targetState };
+
+            var effectResult = _effectDispatcher.Dispatch(duelEffect.Effect, context);
+
+            _abilityResultHandler.Handle(effectResult, effectInternalContext);
+            duelEffect.RegisterUse();
         }
     }
 }

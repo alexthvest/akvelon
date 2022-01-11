@@ -4,7 +4,7 @@ namespace RpgSaga.Core.Models;
 
 public abstract class Hero
 {
-    private readonly List<Type> _abilities = new ();
+    private readonly List<IAbility> _abilities = new ();
 
     public Hero(HeroName name, decimal health, decimal attack)
     {
@@ -19,7 +19,7 @@ public abstract class Hero
 
     public decimal Attack { get; }
 
-    public IReadOnlyCollection<Type> Abilities => _abilities;
+    public IReadOnlyCollection<IAbility> Abilities => _abilities;
 
     public override string ToString()
     {
@@ -32,6 +32,6 @@ public abstract class Hero
     protected void AddAbility<TAbility>()
         where TAbility : IAbility, new()
     {
-        _abilities.Add(typeof(TAbility));
+        _abilities.Add(new TAbility());
     }
 }

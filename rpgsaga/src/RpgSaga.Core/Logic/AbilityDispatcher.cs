@@ -12,14 +12,9 @@ internal class AbilityDispatcher : IAbilityDispatcher
         _abilityStorage = abilityStorage;
     }
 
-    public IAbilityResult Dispatch(Type abilityType, DuelContext context)
+    public IAbilityResult Dispatch(IAbility ability, DuelContext context)
     {
-        var abilityInstance = Activator.CreateInstance(abilityType);
-
-        if (abilityInstance is not IAbility { } ability)
-        {
-            throw new Exception($"Invalid ability type: {abilityType}");
-        }
+        var abilityType = ability.GetType();
 
         if (_abilityStorage.GetAbilityHandler(abilityType) is not { } abilityHandler)
         {

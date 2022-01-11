@@ -2,9 +2,9 @@
 
 namespace RpgSaga.Core.Models;
 
-public record DuelEffect(IEffect Effect, Hero Owner, Hero Target, int? Usages = default)
+internal record DuelAbility(IAbility Ability)
 {
-    public int? Usages { get; private set; } = Usages;
+    public int? Usages { get; private set; } = Ability.Usages;
 
     public bool Infinite => Usages is null;
 

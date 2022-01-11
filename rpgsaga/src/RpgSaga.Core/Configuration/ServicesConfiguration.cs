@@ -6,6 +6,7 @@ using RpgSaga.Core.AbilityResults.SkipTurn;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
+using RpgSaga.Core.Models;
 using RpgSaga.Core.Storages;
 
 namespace RpgSaga.Core;
@@ -15,13 +16,16 @@ internal static class ServicesConfiguration
     public static IServiceCollection AddRpgSagaCore(this IServiceCollection services)
     {
         services.AddSingleton<GameConfiguration>();
-
+        
         services.AddSingleton<IRoundHandler, RoundHandler>();
         services.AddSingleton<IDuelHandler, DuelHandler>();
 
         services.AddSingleton<IHeroStorage, HeroStorage>();
         services.AddSingleton<IAbilityStorage, AbilityStorage>();
+        services.AddSingleton<IEffectStorage, EffectStorage>();
+
         services.AddSingleton<IAbilityDispatcher, AbilityDispatcher>();
+        services.AddSingleton<IEffectDispatcher, EffectDispactcher>();
 
         services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
         services.AddSingleton<IRandomNameGenerator, RandomNameGenerator>();

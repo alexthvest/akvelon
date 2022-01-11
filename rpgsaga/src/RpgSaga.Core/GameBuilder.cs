@@ -7,7 +7,7 @@ public sealed class GameBuilder
 {
     private readonly string[] _args;
     private readonly Action<GameConfiguration>? _configure;
-    private readonly ServiceCollection _services = new();
+    private readonly ServiceCollection _services = new ();
 
     public GameBuilder(string[] args, Action<GameConfiguration>? configure = default)
     {

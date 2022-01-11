@@ -2,7 +2,7 @@
 
 namespace RpgSaga.Core.Abstractions;
 
-public interface IAbilityDispatcher
+internal interface IAbilityDispatcher
 {
-    IAbilityResult Dispatch(Type abilityType, DuelContext context);
+    IAbilityResult Dispatch(IAbility ability, DuelContext context);
 }
