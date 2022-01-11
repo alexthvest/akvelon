@@ -4,6 +4,13 @@ namespace RpgSaga.Core.Readers;
 
 internal class ConsoleReader : IReader
 {
+    private readonly string? _promptMessage;
+
+    public ConsoleReader(string? promptMessage = default)
+    {
+        _promptMessage = promptMessage;
+    }
+
     public byte? ReadByte()
     {
         var input = ReadString();
@@ -18,6 +25,11 @@ internal class ConsoleReader : IReader
 
     public string? ReadString()
     {
+        if (_promptMessage is not null)
+        {
+            Console.Write(_promptMessage);
+        }
+
         return Console.ReadLine();
     }
 }
