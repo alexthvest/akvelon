@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
-using RpgSaga.Core.Managment;
 using RpgSaga.Core.Models;
 using RpgSaga.Core.Readers;
 
@@ -18,13 +17,7 @@ public sealed class Game
 
     public static GameBuilder CreateBuilder(string[] args)
     {
-        var builder = new GameBuilder(args);
-
-        // Configure services
-        builder.Services.AddSingleton<IGameLoop, GameLoop>();
-        builder.Services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
-
-        return builder;
+        return new GameBuilder(args);
     }
 
     public void Start()
@@ -48,7 +41,7 @@ public sealed class Game
 
         var heroes = Enumerable.Range(0, heroesCount.Value).Select(i => new Hero($"Hero #{i}"));
 
-        var gameLoop = _serviceProvider.GetRequiredService<IGameLoop>();
+        var gameLoop = ActivatorUtilities.CreateInstance<GameLoop>(_serviceProvider);
         gameLoop.Start(heroes);
     }
 }

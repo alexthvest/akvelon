@@ -9,7 +9,6 @@ internal static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddRpgSagaCore(this IServiceCollection services)
     {
-        services.AddSingleton<IGameLoop, GameLoop>();
         services.AddSingleton<IRoundHandler, RoundHandler>();
         services.AddSingleton<IDuelHandler, DuelHandler>();
         services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();

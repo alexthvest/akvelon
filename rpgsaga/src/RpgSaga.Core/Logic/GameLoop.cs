@@ -3,7 +3,7 @@ using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Logic;
 
-internal sealed class GameLoop : IGameLoop
+internal sealed class GameLoop
 {
     private readonly IRoundPairGenerator _roundPairGenerator;
     private readonly IRoundHandler _roundHandler;
