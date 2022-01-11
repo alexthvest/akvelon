@@ -2,10 +2,15 @@
 
 namespace RpgSaga.Core.Tests.Data;
 
-internal sealed class DummyHero : Hero
+internal class DummyHero : Hero
 {
     public DummyHero() 
-        : base(new HeroName("Dummy", "Hero"), 0, 0)
+        : this(1, 1)
+    {
+    }
+
+    public DummyHero(decimal health, decimal attack)
+        : base(new HeroName("Dummy", "Hero"), health, attack)
     {
     }
 }

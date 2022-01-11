@@ -5,7 +5,7 @@ using Xunit;
 
 namespace RpgSaga.Core.Tests.Managment;
 
-public sealed class RoundPairGeneratorTests
+public class RoundPairGeneratorTests
 {
     [Fact]
     public void ShouldGenerate_EvenNumberOfPairs_WhenHeroesNumberIsEven()

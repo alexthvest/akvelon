@@ -7,7 +7,7 @@ using Xunit;
 
 namespace RpgSaga.Core.Tests.Managment;
 
-public sealed class RandomHeroGeneratorTests
+public class RandomHeroGeneratorTests
 {
     [Fact]
     public void ShouldReturn_SpecificHeroInstance_ByHeroName()

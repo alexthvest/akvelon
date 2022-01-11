@@ -6,7 +6,7 @@ using Xunit;
 
 namespace RpgSaga.Core.Tests.Storages;
 
-public sealed class HeroStorageTests
+public class HeroStorageTests
 {
     [Fact]
     public void ShouldAppend_HeroToCollection_ByHeroClassName()
