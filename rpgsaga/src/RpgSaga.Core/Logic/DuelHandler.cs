@@ -1,29 +1,41 @@
-﻿using RpgSaga.Core.AbilityResults;
+using Microsoft.Extensions.Logging;
+using RpgSaga.Core.AbilityResults;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Extensions;
 using RpgSaga.Core.Models;
+using RpgSaga.Core.Writers;
 
 namespace RpgSaga.Core.Logic;
 
 internal class DuelHandler : IDuelHandler
 {
+    private readonly ILogger<DuelHandler> _logger;
+    private readonly IWriter _writer;
     private readonly ITurnManagerFactory _turnManagerFactory;
     private readonly IAbilityDispatcher _abilityDispatcher;
     private readonly IAbilityResultHandler _abilityResultHandler;
     private readonly IEffectDispatcher _effectDispatcher;
 
     public DuelHandler(
+        ILogger<DuelHandler> logger,
         ITurnManagerFactory turnManagerFactory,
         IAbilityDispatcher abilityDispatcher,
         IEffectDispatcher effectDispatcher,
         IAbilityResultHandler abilityResultHandler)
     {
+        _logger = logger;
         _turnManagerFactory = turnManagerFactory;
         _abilityDispatcher = abilityDispatcher;
         _effectDispatcher = effectDispatcher;
         _abilityResultHandler = abilityResultHandler;
+        _writer = new ConsoleWriter();
     }
 
+    /// <summary>
+    /// Handles battle logic between two heroes.
+    /// </summary>
+    /// <param name="heroes">Pair of heroes.</param>
+    /// <returns>Result of battle containing heroes and winner of the duel.</returns>
     public GameDuel Handle(Hero[] heroes)
     {
         if (heroes.Length == 0)
@@ -36,7 +48,8 @@ internal class DuelHandler : IDuelHandler
             return new GameDuel(heroes, heroes[0]);
         }
 
-        Console.WriteLine($"{heroes[0]} vs {heroes[1]}");
+        _writer.WriteLine($">>> {heroes[0]} vs {heroes[1]}");
+        _logger.LogInformation("Duel between two heroes begin: {@Heroes}", heroes);
 
         var heroStates = heroes.Select(hero => new HeroState(hero)).ToArray();
         var turnManager = _turnManagerFactory.Create(heroStates);
@@ -68,14 +81,17 @@ internal class DuelHandler : IDuelHandler
                 abilityResult = _abilityDispatcher.Dispatch(ability, context);
                 duelAbility.RegisterUse();
 
-                Console.WriteLine($"{owner} uses {abilityName}");
+                _writer.WriteLine($"{owner} uses {abilityName}");
+                _logger.LogInformation("Ability used: {@Owner} {@Ability}", owner, ability);
             }
 
             _abilityResultHandler.Handle(abilityResult, internalContext);
 
             if (target.IsDead)
             {
-                Console.WriteLine($"{target} has died out");
+                _writer.WriteLine($"{target} has died out");
+                _logger.LogInformation("Hero has died out: {@Hero}", target);
+
                 return new GameDuel(heroes, owner);
             }
 

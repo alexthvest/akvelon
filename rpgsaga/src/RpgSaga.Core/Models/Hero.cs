@@ -8,6 +8,16 @@ public abstract class Hero
 
     public Hero(HeroName name, decimal health, decimal attack)
     {
+        if (health <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(health), "Health must be greater than zero");
+        }
+
+        if (attack <= 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(attack), "Attack must be greater than zero");
+        }
+
         Name = name;
         Health = health;
         Attack = attack;
