@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Logging;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
-using RpgSaga.Core.Writers;
 
 namespace RpgSaga.Core.Logic;
 
@@ -12,12 +11,12 @@ internal sealed class GameLoop
     private readonly IRoundHandler _roundHandler;
     private readonly IWriter _writer;
 
-    public GameLoop(ILogger<GameLoop> logger, IRoundPairGenerator roundPairGenerator, IRoundHandler roundHandler)
+    public GameLoop(ILogger<GameLoop> logger, IRoundPairGenerator roundPairGenerator, IRoundHandler roundHandler, IWriter writer)
     {
         _logger = logger;
         _roundPairGenerator = roundPairGenerator;
         _roundHandler = roundHandler;
-        _writer = new ConsoleWriter();
+        _writer = writer;
     }
 
     public void Start(IEnumerable<Hero> heroes)

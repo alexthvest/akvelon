@@ -10,10 +10,10 @@ internal sealed class DuelHandler : IDuelHandler
     private readonly ILogger<DuelHandler> _logger;
     private readonly IWriter _writer;
 
-    public DuelHandler(ILogger<DuelHandler> logger)
+    public DuelHandler(ILogger<DuelHandler> logger, IWriter writer)
     {
         _logger = logger;
-        _writer = new ConsoleWriter();
+        _writer = writer;
     }
 
     /// <summary>
