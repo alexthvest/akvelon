@@ -1,7 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
+using RpgSaga.Core.Managment;
+using RpgSaga.Core.Models;
 using RpgSaga.Core.Readers;
+using RpgSaga.Core.Writers;
 
 namespace RpgSaga.Core;
 
@@ -21,27 +25,48 @@ public sealed class Game
 
     public void Start()
     {
-        var randomHeroGenerator = _serviceProvider.GetRequiredService<IRandomHeroGenerator>();
         var commandLineArgsAccessor = _serviceProvider.GetRequiredService<CommandLineArgsAccessor>();
         var commandLineArgs = commandLineArgsAccessor.Args;
 
-        IReader reader = new ConsoleReader("Enter number of heroes: ");
+        var heroProviderType = typeof(ConsoleHeroProvider);
 
-        if (commandLineArgs.Contains("-c"))
+        if (commandLineArgs.Contains("-i"))
         {
-            reader = new CommandLineArgsReader(commandLineArgs, "-c");
+            heroProviderType = typeof(FileHeroProvider);
         }
 
-        var heroesCount = reader.ReadByte();
-
-        if (!heroesCount.HasValue || heroesCount < 2)
+        if (ActivatorUtilities.CreateInstance(_serviceProvider, heroProviderType) is not IHeroProvider heroProvider)
         {
-            throw new ArgumentOutOfRangeException("Please enter valid number of heroes that greater or equals 2");
+            throw new Exception("Invalid hero provider type, it should implements IHeroProvider interface");
         }
 
-        var heroes = Enumerable.Range(0, heroesCount.Value).Select(_ => randomHeroGenerator.Generate());
+        var heroes = heroProvider.ResolveHeroes();
+
+        if (commandLineArgs.Contains("-o"))
+        {
+            SaveHeroes(commandLineArgs, heroes);
+        }
 
         var gameLoop = ActivatorUtilities.CreateInstance<GameLoop>(_serviceProvider);
         gameLoop.Start(heroes);
+    }
+
+    private static void SaveHeroes(string[] commandLineArgs, IEnumerable<Hero> heroes)
+    {
+        var outputPathReader = new CommandLineArgsReader(commandLineArgs, "-o");
+
+        if (outputPathReader.ReadString() is not { } outputPath)
+        {
+            throw new ArgumentException("Invalid path");
+        }
+
+        var heroesRaw = JsonConvert.SerializeObject(heroes, new JsonSerializerSettings
+        {
+            TypeNameHandling = TypeNameHandling.Auto,
+            Formatting = Formatting.Indented,
+        });
+
+        var writer = new FileWriter(outputPath);
+        writer.WriteLine(heroesRaw);
     }
 }
