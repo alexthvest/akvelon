@@ -3,7 +3,6 @@ using RpgSaga.Core.AbilityResults;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Extensions;
 using RpgSaga.Core.Models;
-using RpgSaga.Core.Writers;
 
 namespace RpgSaga.Core.Logic;
 
@@ -18,17 +17,18 @@ internal class DuelHandler : IDuelHandler
 
     public DuelHandler(
         ILogger<DuelHandler> logger,
+        IWriter writer,
         ITurnManagerFactory turnManagerFactory,
         IAbilityDispatcher abilityDispatcher,
         IEffectDispatcher effectDispatcher,
         IAbilityResultHandler abilityResultHandler)
     {
         _logger = logger;
+        _writer = writer;
         _turnManagerFactory = turnManagerFactory;
         _abilityDispatcher = abilityDispatcher;
         _effectDispatcher = effectDispatcher;
         _abilityResultHandler = abilityResultHandler;
-        _writer = new ConsoleWriter();
     }
 
     /// <summary>
