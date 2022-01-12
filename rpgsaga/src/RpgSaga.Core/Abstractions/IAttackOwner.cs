@@ -1,5 +1,5 @@
 ﻿namespace RpgSaga.Core.Abstractions;
 
-public interface IEffect : IAttackOwner
+public interface IAttackOwner
 {
 }

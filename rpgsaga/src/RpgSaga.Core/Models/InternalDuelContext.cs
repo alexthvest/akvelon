@@ -2,7 +2,7 @@
 
 namespace RpgSaga.Core.Models;
 
-internal record InternalDuelContext(HeroState Owner, HeroState Target)
+internal record InternalDuelContext(IAttackOwner Owner, HeroState Target)
 {
     private readonly List<DuelEffect> _effects = new ();
 
@@ -14,7 +14,12 @@ internal record InternalDuelContext(HeroState Owner, HeroState Target)
 
     public void ApplyEffect(IEffect effect, int? usages = default)
     {
-        var duelEffect = new DuelEffect(effect, Owner, Target, usages);
+        if (Owner is not HeroState owner)
+        {
+            return;
+        }
+
+        var duelEffect = new DuelEffect(effect, owner, Target, usages);
         _effects.Add(duelEffect);
     }
 

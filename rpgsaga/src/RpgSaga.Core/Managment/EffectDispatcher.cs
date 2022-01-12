@@ -1,7 +1,7 @@
 ﻿using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 
-namespace RpgSaga.Core.Logic;
+namespace RpgSaga.Core.Managment;
 
 internal class EffectDispactcher : IEffectDispatcher
 {

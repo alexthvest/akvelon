@@ -8,7 +8,6 @@ internal class FireEffectHandler : IEffectHandler<FireEffect>
 {
     public IAbilityResult Handle(FireEffect effect, DuelContext context)
     {
-        Console.WriteLine($"<Fire> deals {effect.Damage} to {context.Target}");
         return AbilityResult.FromDamage(effect.Damage);
     }
 }

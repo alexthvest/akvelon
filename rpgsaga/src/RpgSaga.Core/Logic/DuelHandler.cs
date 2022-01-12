@@ -115,7 +115,7 @@ internal class DuelHandler : IDuelHandler
             var targetState = heroStates.First(s => s.Hero == target);
 
             var context = new DuelContext(owner, target, internalContext.Effects);
-            var effectInternalContext = internalContext with { Owner = ownerState, Target = targetState };
+            var effectInternalContext = internalContext with { Owner = duelEffect.Effect, Target = targetState };
 
             var effectResult = _effectDispatcher.Dispatch(duelEffect.Effect, context);
 

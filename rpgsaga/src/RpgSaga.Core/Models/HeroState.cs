@@ -1,6 +1,8 @@
-﻿namespace RpgSaga.Core.Models;
+﻿using RpgSaga.Core.Abstractions;
 
-internal class HeroState
+namespace RpgSaga.Core.Models;
+
+internal class HeroState : IAttackOwner
 {
     private readonly DuelAbility[] _abilities;
 
