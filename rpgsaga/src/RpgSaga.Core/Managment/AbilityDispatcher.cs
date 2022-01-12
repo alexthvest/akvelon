@@ -1,4 +1,5 @@
 ﻿using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Exceptions;
 using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Managment;
@@ -18,7 +19,7 @@ internal class AbilityDispatcher : IAbilityDispatcher
 
         if (_abilityStorage.GetAbilityHandler(abilityType) is not { } abilityHandler)
         {
-            throw new Exception($"Ability of type {abilityType} has no handlers");
+            throw new AbilityHandlerNotFoundException(abilityType);
         }
 
         return abilityHandler.Handle(ability, context);

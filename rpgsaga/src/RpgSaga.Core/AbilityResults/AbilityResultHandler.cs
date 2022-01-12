@@ -1,4 +1,5 @@
 ﻿using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Exceptions;
 using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.AbilityResults;
@@ -19,7 +20,7 @@ internal class AbilityResultHandler : IAbilityResultHandler
 
         if (_serviceProvider.GetService(abilityResultHandlerType) is not IAbilityResultHandler abilityResultHandler)
         {
-            throw new Exception($"Ability result of type {abilityResultType} has no handlers");
+            throw new AbilityResultHandlerNotFoundException(abilityResultType);
         }
 
         abilityResultHandler.Handle(abilityResult, context);
