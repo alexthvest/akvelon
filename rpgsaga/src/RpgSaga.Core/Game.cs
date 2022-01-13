@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+﻿using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
@@ -55,15 +55,20 @@ public sealed class Game
     {
         var outputPathReader = new CommandLineArgsReader(commandLineArgs, "-o");
 
+        var heroDtos = heroes.Select(hero =>
+        {
+            var type = hero.GetType().Name;
+            return new HeroDto(type, hero.Name, hero.Health, hero.Attack);
+        }).ToArray();
+
         if (outputPathReader.ReadString() is not { } outputPath)
         {
             throw new ArgumentException("Invalid path");
         }
 
-        var heroesRaw = JsonConvert.SerializeObject(heroes, new JsonSerializerSettings
+        var heroesRaw = JsonSerializer.Serialize(heroDtos, new JsonSerializerOptions
         {
-            TypeNameHandling = TypeNameHandling.Auto,
-            Formatting = Formatting.Indented,
+            WriteIndented = true,
         });
 
         var writer = new FileWriter(outputPath);

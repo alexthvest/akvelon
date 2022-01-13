@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 using RpgSaga.Core.Readers;
@@ -7,10 +7,12 @@ namespace RpgSaga.Core.Managment;
 
 internal class FileHeroProvider : IHeroProvider
 {
+    private readonly IHeroStorage _heroStorage;
     private readonly CommandLineArgsAccessor _commandLineArgsAccessor;
 
-    public FileHeroProvider(CommandLineArgsAccessor commandLineArgsAccessor)
+    public FileHeroProvider(IHeroStorage heroStorage, CommandLineArgsAccessor commandLineArgsAccessor)
     {
+        _heroStorage = heroStorage;
         _commandLineArgsAccessor = commandLineArgsAccessor;
     }
 
@@ -31,16 +33,21 @@ internal class FileHeroProvider : IHeroProvider
             throw new InvalidDataException("Invalid data");
         }
 
-        var heroes = JsonConvert.DeserializeObject<IEnumerable<Hero>>(heroesRaw, new JsonSerializerSettings
-        {
-            TypeNameHandling = TypeNameHandling.Auto,
-        });
+        var heroDtos = JsonSerializer.Deserialize<IEnumerable<HeroDto>>(heroesRaw);
 
-        if (heroes is null)
+        if (heroDtos is null)
         {
             throw new InvalidDataException("Failed to deserialize heroes");
         }
 
-        return heroes;
+        foreach (var heroDto in heroDtos)
+        {
+            if (_heroStorage.GetHeroFactory(heroDto.Type) is not { } heroFactory)
+            {
+                throw new KeyNotFoundException($"Hero '{heroDto.Type} not found'");
+            }
+
+            yield return heroFactory.Invoke(heroDto.Name, heroDto.Health, heroDto.Attack);
+        }
     }
 }
