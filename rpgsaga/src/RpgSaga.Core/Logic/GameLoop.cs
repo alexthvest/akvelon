@@ -1,24 +1,28 @@
-﻿using RpgSaga.Core.Abstractions;
+using Microsoft.Extensions.Logging;
+using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
-using RpgSaga.Core.Writers;
 
 namespace RpgSaga.Core.Logic;
 
 internal sealed class GameLoop
 {
+    private readonly ILogger<GameLoop> _logger;
     private readonly IRoundPairGenerator _roundPairGenerator;
     private readonly IRoundHandler _roundHandler;
     private readonly IWriter _writer;
 
-    public GameLoop(IRoundPairGenerator roundPairGenerator, IRoundHandler roundHandler)
+    public GameLoop(ILogger<GameLoop> logger, IRoundPairGenerator roundPairGenerator, IRoundHandler roundHandler, IWriter writer)
     {
+        _logger = logger;
         _roundPairGenerator = roundPairGenerator;
         _roundHandler = roundHandler;
-        _writer = new ConsoleWriter();
+        _writer = writer;
     }
 
     public void Start(IEnumerable<Hero> heroes)
     {
+        _logger.LogInformation("Number of heroes generated: {Count}", heroes.Count());
+
         while (true)
         {
             var pairs = _roundPairGenerator.Generate(heroes);
@@ -27,12 +31,17 @@ internal sealed class GameLoop
             if (round.Winners.Length == 1)
             {
                 var winner = round.Winners[0];
-                _writer.WriteLine(winner.Name);
 
+                _writer.WriteLine(string.Empty);
+                _writer.WriteLine($"👑 Winner: {winner}");
+
+                _logger.LogInformation("Winner of the battle: {@Winner}", winner);
                 break;
             }
 
             heroes = round.Winners;
-        } 
+
+            _writer.WriteLine(string.Empty);
+        }
     }
 }

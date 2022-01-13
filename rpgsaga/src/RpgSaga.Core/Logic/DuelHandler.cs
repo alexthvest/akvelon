@@ -1,4 +1,5 @@
-﻿using RpgSaga.Core.Abstractions;
+using Microsoft.Extensions.Logging;
+using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Models;
 using RpgSaga.Core.Writers;
 
@@ -6,11 +7,13 @@ namespace RpgSaga.Core.Logic;
 
 internal sealed class DuelHandler : IDuelHandler
 {
+    private readonly ILogger<DuelHandler> _logger;
     private readonly IWriter _writer;
 
-    public DuelHandler()
+    public DuelHandler(ILogger<DuelHandler> logger, IWriter writer)
     {
-        _writer = new ConsoleWriter();
+        _logger = logger;
+        _writer = writer;
     }
 
     /// <summary>
@@ -20,13 +23,21 @@ internal sealed class DuelHandler : IDuelHandler
     /// <returns>Result of battle containing heroes and winner of the duel.</returns>
     public GameDuel Handle(Hero[] heroes)
     {
-        if (heroes.Length > 1)
+        if (heroes.Length == 0)
         {
-            _writer.WriteLine($">>> {heroes[0].Name} vs {heroes[1].Name}");
+            throw new ArgumentOutOfRangeException("Pair must consists of one or two heroes");
         }
 
-        var winner = heroes[Random.Shared.Next(0, heroes.Length)];
+        if (heroes.Length == 1)
+        {
+            return new GameDuel(heroes, heroes[0]);
+        }
 
-        return new GameDuel(heroes, winner);
+        _writer.WriteLine($">>> {heroes[0]} vs {heroes[1]}");
+        _logger.LogInformation("Duel between two heroes begin: {@Heroes}", heroes);
+
+        var winner = heroes.MaxBy(p => p.Health + p.Attack);
+
+        return new GameDuel(heroes, winner!);
     }
 }
