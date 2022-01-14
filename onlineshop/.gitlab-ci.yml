@@ -1,10 +1,11 @@
 stages:
-  - projects
+  - client
+  - server
 
-rpgsaga:
-  stage: projects
+client:
+  stage: client
   trigger:
-    include: rpgsaga/.gitlab-ci.yml
+    include: onlineshop/client/.gitlab-ci.yml
     strategy: depend
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -12,12 +13,12 @@ rpgsaga:
       when: never
     - if: "$CI_COMMIT_BRANCH"
     - changes:
-        - rpgsaga/**/*
+        - onlineshop/client/**/*
 
-online-shop:
-  stage: projects
+server:
+  stage: server
   trigger:
-    include: onlineshop/.gitlab-ci.yml
+    include: onlineshop/server/.gitlab-ci.yml
     strategy: depend
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
@@ -25,4 +26,4 @@ online-shop:
       when: never
     - if: "$CI_COMMIT_BRANCH"
     - changes:
-        - onlineshop/**/*
+        - onlineshop/server/**/*
