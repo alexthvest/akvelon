@@ -1,4 +1,4 @@
-image: mcr.microsoft.com/dotnet/sdk:6.0
+image: node:16.13.1
 
 workflow:
   rules:
@@ -7,17 +7,27 @@ workflow:
       when: never
     - if: "$CI_COMMIT_BRANCH"
     - changes:
-        - rpgsaga/**/*
+        - onlineshop/client/**/*
 
 before_script:
-  - cd rpgsaga/
+  - cd onlineshop/client/
 
 stages:
+  - lint
   - test
+
+lint:
+  stage: lint
+  tags:
+    - docker
+  script:
+    - npm install
+    - npm run lint
 
 test:
   stage: test
   tags:
     - docker
   script:
-    - dotnet test -c Release
+    - npm install
+    - npm run test
