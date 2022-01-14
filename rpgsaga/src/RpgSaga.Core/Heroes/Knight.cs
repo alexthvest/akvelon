@@ -3,9 +3,9 @@ using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Heroes;
 
-public sealed class Knight : Hero
+internal sealed class Knight : Hero
 {
-    public Knight(HeroName name, decimal health, decimal attack) 
+    public Knight(HeroName name, decimal health, decimal attack)
         : base(name, health, attack)
     {
         AddAbility<NemesisAbility>();
