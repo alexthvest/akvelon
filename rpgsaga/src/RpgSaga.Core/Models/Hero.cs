@@ -1,10 +1,7 @@
-﻿using System.Text.Json.Serialization;
-
-namespace RpgSaga.Core.Models;
+﻿namespace RpgSaga.Core.Models;
 
 public abstract class Hero
 {
-    [JsonConstructor]
     public Hero(HeroName name, decimal health, decimal attack)
     {
         if (health <= 0)
