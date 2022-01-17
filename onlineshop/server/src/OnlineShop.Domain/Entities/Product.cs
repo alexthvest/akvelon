@@ -1,8 +1,6 @@
 ﻿namespace OnlineShop.Domain.Entities;
 
-public class Product
+public class Product : Entity<Guid>
 {
-    public int Id { get; init; }
-
     public string Name { get; init; } = default!;
 }

@@ -8,11 +8,11 @@ rpgsaga:
     strategy: depend
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      allow_failure: true
+      changes:
+        - rpgsaga/**/*
     - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
       when: never
-    - if: "$CI_COMMIT_BRANCH"
-    - changes:
-        - rpgsaga/**/*
 
 online-shop:
   stage: projects
@@ -21,8 +21,8 @@ online-shop:
     strategy: depend
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      allow_failure: true
+      changes:
+        - onlineshop/**/*
     - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
       when: never
-    - if: "$CI_COMMIT_BRANCH"
-    - changes:
-        - onlineshop/**/*

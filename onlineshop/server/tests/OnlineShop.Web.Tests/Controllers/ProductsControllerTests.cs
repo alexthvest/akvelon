@@ -27,7 +27,7 @@ public class ProductsControllerTests : TestBase
 
         // Assert
         var okObjectResult = Assert.IsType<OkObjectResult>(result.Result);
-        var listOfProducts = Assert.IsType<ProductDto[]>(okObjectResult.Value);
+        var listOfProducts = Assert.IsType<ProductResponse[]>(okObjectResult.Value);
 
         Assert.Equal(TestProducts.AllProducts.Count, listOfProducts.Length);
     }
