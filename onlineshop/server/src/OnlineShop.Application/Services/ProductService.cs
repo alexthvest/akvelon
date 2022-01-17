@@ -1,11 +1,12 @@
-﻿using OnlineShop.Application.Dto.Request;
-using OnlineShop.Application.Dto.Response;
-using OnlineShop.Application.Interfaces;
+using OnlineShop.Application.Abstractions;
+using OnlineShop.Application.Requests;
+using OnlineShop.Application.Responses;
+using OnlineShop.Domain.Entities;
 using OnlineShop.Domain.Repositories;
 
 namespace OnlineShop.Application.Services;
 
-public class ProductService : IProductService
+internal class ProductService : IProductService
 {
     private readonly IProductRepository _productRepository;
 
@@ -14,15 +15,22 @@ public class ProductService : IProductService
         _productRepository = productRepository;
     }
 
-    public IReadOnlyCollection<ProductDto> GetProducts()
+    public IReadOnlyCollection<ProductResponse> GetProducts()
     {
         return _productRepository.GetProducts()
-                .Select(product => new ProductDto(product))
+                .Select(product => new ProductResponse(product))
                 .ToArray();
     }
 
-    public ProductDto InsetProduct(ProductCreateRequestDto product)
+    public async Task<ProductResponse> InsetProductAsync(CreateProductRequest request)
     {
-        return new ProductDto(_productRepository.InsertProduct(product.ToModel()));
+        var product = new Product
+        {
+            Name = request.Name,
+        };
+
+        var entity = await _productRepository.InsertProductAsync(product);
+
+        return new ProductResponse(entity);
     }
 }

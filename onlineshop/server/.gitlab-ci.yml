@@ -2,11 +2,11 @@ image: mcr.microsoft.com/dotnet/sdk:6.0
 
 workflow:
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
       when: never
-    - if: "$CI_COMMIT_BRANCH"
-    - changes:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      allow_failure: false
+      changes:
         - onlineshop/server/**/*
 
 before_script:

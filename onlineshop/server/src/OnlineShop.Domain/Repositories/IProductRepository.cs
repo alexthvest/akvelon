@@ -6,5 +6,5 @@ public interface IProductRepository
 {
     IQueryable<Product> GetProducts();
 
-    Product InsertProduct(Product product);
+    Task<Product> InsertProductAsync(Product product);
 }

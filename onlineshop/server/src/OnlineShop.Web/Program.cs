@@ -1,23 +1,20 @@
-using Microsoft.EntityFrameworkCore;
-using OnlineShop.Application.Interfaces;
-using OnlineShop.Application.Services;
-using OnlineShop.Domain.Repositories;
-using OnlineShop.Infrastructure.Contexts;
-using OnlineShop.Infrastructure.Repositories;
+using OnlineShop.Application;
+using OnlineShop.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Configure services
+builder.Host.ConfigureServices(services =>
+{
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
 
-builder.Services.AddNpgsql<ApplicationDbContext>(
-    builder.Configuration.GetConnectionString("DefaultConnection"));
+    services.AddApplication();
+    services.AddInfrastructure(builder.Configuration);
+});
 
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductService, ProductService>();
-
+// Application
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

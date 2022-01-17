@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Application.Dto.Request;
-using OnlineShop.Application.Dto.Response;
-using OnlineShop.Application.Interfaces;
+using OnlineShop.Application.Abstractions;
+using OnlineShop.Application.Requests;
+using OnlineShop.Application.Responses;
 
 namespace OnlineShop.Web.Controllers;
 
@@ -9,24 +9,26 @@ namespace OnlineShop.Web.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private readonly ILogger<ProductsController> _logger;
     private readonly IProductService _productService;
 
-    public ProductsController(ILogger<ProductsController> logger, IProductService productService)
+    public ProductsController(IProductService productService)
     {
-        _logger = logger;
         _productService = productService;
     }
 
     [HttpGet]
-    public ActionResult<IReadOnlyCollection<ProductDto>> GetProducts()
+    public ActionResult<IReadOnlyCollection<ProductResponse>> GetProducts()
     {
-        return Ok(_productService.GetProducts());
+        var products = _productService.GetProducts();
+
+        return Ok(products);
     }
 
     [HttpPost]
-    public ActionResult<ProductDto> InsertProduct([FromBody] ProductCreateRequestDto product)
+    public async Task<ActionResult<ProductResponse>> InsertProductAsync([FromBody] CreateProductRequest request)
     {
-        return Ok(_productService.InsetProduct(product));
+        var response = await _productService.InsetProductAsync(request);
+
+        return Ok(response);
     }
 }
