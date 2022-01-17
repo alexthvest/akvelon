@@ -55,11 +55,7 @@ public sealed class Game
     {
         var outputPathReader = new CommandLineArgsReader(commandLineArgs, "-o");
 
-        var heroDtos = heroes.Select(hero =>
-        {
-            var type = hero.GetType().Name;
-            return new HeroDto(type, hero.Name, hero.Health, hero.Attack);
-        }).ToArray();
+        var heroDtos = heroes.Select(hero => new HeroDto(hero.GetType().Name, hero.Name)).ToArray();
 
         if (outputPathReader.ReadString() is not { } outputPath)
         {

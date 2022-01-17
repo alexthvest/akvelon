@@ -4,5 +4,5 @@ namespace RpgSaga.Core.Abstractions;
 
 internal interface IHeroProvider
 {
-    IEnumerable<Hero> ResolveHeroes();
+    IReadOnlyCollection<Hero> ResolveHeroes();
 }

@@ -7,16 +7,16 @@ namespace RpgSaga.Core.Managment;
 
 internal class FileHeroProvider : IHeroProvider
 {
-    private readonly IHeroStorage _heroStorage;
+    private readonly IHeroGenerator _heroGenerator;
     private readonly CommandLineArgsAccessor _commandLineArgsAccessor;
 
-    public FileHeroProvider(IHeroStorage heroStorage, CommandLineArgsAccessor commandLineArgsAccessor)
+    public FileHeroProvider(CommandLineArgsAccessor commandLineArgsAccessor, IHeroGenerator heroGenerator)
     {
-        _heroStorage = heroStorage;
+        _heroGenerator = heroGenerator;
         _commandLineArgsAccessor = commandLineArgsAccessor;
     }
 
-    public IEnumerable<Hero> ResolveHeroes()
+    public IReadOnlyCollection<Hero> ResolveHeroes()
     {
         var commandLineArgs = _commandLineArgsAccessor.Args;
         var inputPathReader = new CommandLineArgsReader(commandLineArgs, "-i");
@@ -40,14 +40,8 @@ internal class FileHeroProvider : IHeroProvider
             throw new InvalidDataException("Failed to deserialize heroes");
         }
 
-        foreach (var heroDto in heroDtos)
-        {
-            if (_heroStorage.GetHeroFactory(heroDto.Type) is not { } heroFactory)
-            {
-                throw new KeyNotFoundException($"Hero '{heroDto.Type} not found'");
-            }
-
-            yield return heroFactory.Invoke(heroDto.Name, heroDto.Health, heroDto.Attack);
-        }
+        return heroDtos
+            .Select(heroDto => _heroGenerator.Generate(heroDto.Type, heroDto.Name))
+            .ToArray();
     }
 }

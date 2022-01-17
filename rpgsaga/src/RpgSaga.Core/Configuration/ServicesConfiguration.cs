@@ -29,7 +29,7 @@ internal static class ServicesConfiguration
 
         services.AddSingleton<IRoundPairGenerator, RoundPairGenerator>();
         services.AddSingleton<IRandomNameGenerator, RandomNameGenerator>();
-        services.AddSingleton<IRandomHeroGenerator, RandomHeroGenerator>();
+        services.AddSingleton<IHeroGenerator, HeroGenerator>();
 
         return services;
     }
