@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using OnlineShop.Infrastructure.Contexts;
+using OnlineShop.Infrastructure.Data;
 using WebAPI.MockFactory.Tests.Factory.Interfaces;
 
 namespace OnlineShop.Web.MockFactory.Tests.Utils;

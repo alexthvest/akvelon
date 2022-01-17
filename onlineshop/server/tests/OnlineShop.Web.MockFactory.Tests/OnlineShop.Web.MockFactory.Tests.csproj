@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -13,10 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\OnlineShop.Infrastructure\OnlineShop.Infrastructure.csproj" />
     <ProjectReference Include="..\..\src\OnlineShop.Web\OnlineShop.Web.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Factory\" />
   </ItemGroup>
 
 </Project>

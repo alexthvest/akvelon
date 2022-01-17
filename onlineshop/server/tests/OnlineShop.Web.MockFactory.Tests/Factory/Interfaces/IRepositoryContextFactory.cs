@@ -1,4 +1,4 @@
-﻿using OnlineShop.Infrastructure.Contexts;
+﻿using OnlineShop.Infrastructure.Data;
 
 namespace WebAPI.MockFactory.Tests.Factory.Interfaces;
 
