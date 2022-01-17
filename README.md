@@ -21,13 +21,13 @@ As output of your learning on Bootcamp you should have 3 folders:
 For RpgSaga and online shop we have following templates
 RpgSaga:
 
-- [Python](https://gitlab.akvelon.net:9443/bootcamp/rpgsagapython)
+- [.NET](https://gitlab.akvelon.net:9443/bootcamp/rpgsaganetcore)
 - [NodeJs](https://gitlab.akvelon.net:9443/bootcamp/rpgsagats)
-- [.Net](https://gitlab.akvelon.net:9443/bootcamp/rpgsaganetcore)
+- [Python](https://gitlab.akvelon.net:9443/bootcamp/rpgsagapython)
 
 Online Shop:
 
-- [.Net](https://gitlab.akvelon.net:9443/bootcamp/net-react-template)
+- [.NET](https://gitlab.akvelon.net:9443/bootcamp/net-react-template)
 - [NodeJs](https://gitlab.akvelon.net:9443/bootcamp/nest-react-template)
 - [Python](https://gitlab.akvelon.net:9443/bootcamp/python-react-template)
 

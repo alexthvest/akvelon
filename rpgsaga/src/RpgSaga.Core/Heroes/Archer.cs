@@ -2,9 +2,9 @@
 
 namespace RpgSaga.Core.Heroes;
 
-public sealed class Archer : Hero
+internal sealed class Archer : Hero
 {
-    public Archer(HeroName name, decimal health, decimal attack) 
+    public Archer(HeroName name, decimal health, decimal attack)
         : base(name, health, attack)
     {
     }

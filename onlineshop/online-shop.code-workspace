@@ -1,0 +1,34 @@
+{
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ms-dotnettools.csharp",
+      "jchannon.csharpextensions",
+      "ms-azuretools.vscode-docker"
+    ]
+  },
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "path": "client"
+    },
+    {
+      "path": "server"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "server": true,
+      "client": true
+    }
+  }
+}

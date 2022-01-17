@@ -1,0 +1,29 @@
+stages:
+  - client
+  - server
+
+client:
+  stage: client
+  trigger:
+    include: onlineshop/client/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      allow_failure: true
+      changes:
+        - onlineshop/client/**/*
+
+server:
+  stage: server
+  trigger:
+    include: onlineshop/server/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      allow_failure: true
+      changes:
+        - onlineshop/server/**/*
