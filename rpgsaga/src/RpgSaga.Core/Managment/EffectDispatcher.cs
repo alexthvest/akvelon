@@ -1,4 +1,5 @@
 ﻿using RpgSaga.Core.Abstractions;
+using RpgSaga.Core.Exceptions;
 using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Managment;
@@ -18,7 +19,7 @@ internal class EffectDispactcher : IEffectDispatcher
         
         if (_effectStorage.GetEffectHandler(effectType) is not { } effectHandler)
         {
-            throw new Exception($"Effect of type {effectType} has no handlers");
+            throw new EffectHandlerNotFoundException(effectType);
         }
 
         return effectHandler.Handle(effect, context);
