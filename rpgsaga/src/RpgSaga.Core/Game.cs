@@ -1,5 +1,6 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RpgSaga.Core.Abstractions;
 using RpgSaga.Core.Logic;
 using RpgSaga.Core.Managment;
@@ -12,10 +13,16 @@ namespace RpgSaga.Core;
 public sealed class Game
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly ILogger<Game> _logger;
+    private readonly IWriter _writer;
+    private readonly CommandLineArgsAccessor _commandLineArgsAccessor;
 
     internal Game(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
+        _logger = serviceProvider.GetRequiredService<ILogger<Game>>();
+        _writer = serviceProvider.GetRequiredService<IWriter>();
+        _commandLineArgsAccessor = serviceProvider.GetRequiredService<CommandLineArgsAccessor>();
     }
 
     public static GameBuilder CreateBuilder(string[] args, Action<GameConfiguration>? configure = default)
@@ -25,30 +32,48 @@ public sealed class Game
 
     public void Start()
     {
-        var commandLineArgsAccessor = _serviceProvider.GetRequiredService<CommandLineArgsAccessor>();
-        var commandLineArgs = commandLineArgsAccessor.Args;
-
-        var heroProviderType = typeof(ConsoleHeroProvider);
-
-        if (commandLineArgs.Contains("-i"))
+        try
         {
-            heroProviderType = typeof(FileHeroProvider);
-        }
+            var commandLineArgs = _commandLineArgsAccessor.Args;
 
-        if (ActivatorUtilities.CreateInstance(_serviceProvider, heroProviderType) is not IHeroProvider heroProvider)
+            var heroProviderType = typeof(ConsoleHeroProvider);
+
+            if (commandLineArgs.Contains("-i"))
+            {
+                heroProviderType = typeof(FileHeroProvider);
+            }
+
+            if (ActivatorUtilities.CreateInstance(_serviceProvider, heroProviderType) is not IHeroProvider heroProvider)
+            {
+                throw new Exception("Invalid hero provider type, it should implements IHeroProvider interface");
+            }
+
+            var heroes = heroProvider.ResolveHeroes();
+
+            if (commandLineArgs.Contains("-o"))
+            {
+                SaveHeroes(commandLineArgs, heroes);
+            }
+
+            var gameLoop = ActivatorUtilities.CreateInstance<GameLoop>(_serviceProvider);
+            gameLoop.Start(heroes);
+        }
+        catch (ArgumentOutOfRangeException e)
         {
-            throw new Exception("Invalid hero provider type, it should implements IHeroProvider interface");
+            Console.ForegroundColor = ConsoleColor.Red;
+            _writer.WriteLine("[Error] Invalid argument provider. Please make sure all values are correct");
+            Console.ResetColor();
+
+            _logger.LogCritical(e, "Invalid argument provider: {Name}", e.ParamName);
         }
-
-        var heroes = heroProvider.ResolveHeroes();
-
-        if (commandLineArgs.Contains("-o"))
+        catch (Exception e)
         {
-            SaveHeroes(commandLineArgs, heroes);
-        }
+            Console.ForegroundColor = ConsoleColor.Red;
+            _writer.WriteLine("[Error] Failed to start the game. Something went wrong");
+            Console.ResetColor();
 
-        var gameLoop = ActivatorUtilities.CreateInstance<GameLoop>(_serviceProvider);
-        gameLoop.Start(heroes);
+            _logger.LogCritical(e, "Failed to start the game");
+        }
     }
 
     private static void SaveHeroes(string[] commandLineArgs, IEnumerable<Hero> heroes)
