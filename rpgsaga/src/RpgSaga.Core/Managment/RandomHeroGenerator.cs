@@ -4,7 +4,7 @@ using RpgSaga.Core.Models;
 
 namespace RpgSaga.Core.Managment;
 
-internal sealed class RandomHeroGenerator : IRandomHeroGenerator
+internal class RandomHeroGenerator : IRandomHeroGenerator
 {
     private readonly IHeroStorage _heroStorage;
     private readonly IRandomNameGenerator _randomNameGenerator;
@@ -27,8 +27,8 @@ internal sealed class RandomHeroGenerator : IRandomHeroGenerator
 
         var name = _randomNameGenerator.Generate();
 
-        var health = Random.Shared.Next(10, 120);
-        var attack = Random.Shared.Next(health / 10, health);
+        var health = Random.Shared.Next(10, 80);
+        var attack = Random.Shared.Next(4, health / 2);
 
         return heroFactory.Invoke(name, health, attack);
     }
