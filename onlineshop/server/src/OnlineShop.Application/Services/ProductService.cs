@@ -1,6 +1,6 @@
 using OnlineShop.Application.Abstractions;
+using OnlineShop.Application.Dto;
 using OnlineShop.Application.Requests;
-using OnlineShop.Application.Responses;
 using OnlineShop.Domain.Entities;
 using OnlineShop.Domain.Repositories;
 
@@ -15,22 +15,24 @@ internal class ProductService : IProductService
         _productRepository = productRepository;
     }
 
-    public IReadOnlyCollection<ProductResponse> GetProducts()
+    public IReadOnlyCollection<ProductDto> GetProducts()
     {
         return _productRepository.GetProducts()
-                .Select(product => new ProductResponse(product))
+                .Select(product => new ProductDto(product))
                 .ToArray();
     }
 
-    public async Task<ProductResponse> InsetProductAsync(CreateProductRequest request)
+    public async Task<ProductDto> InsetProductAsync(CreateProductRequest request)
     {
         var product = new Product
         {
             Name = request.Name,
+            Description = request.Description,
+            Price = request.Price,
         };
 
         var entity = await _productRepository.InsertProductAsync(product);
 
-        return new ProductResponse(entity);
+        return new ProductDto(entity);
     }
 }

@@ -1,11 +1,11 @@
-﻿using OnlineShop.Application.Requests;
-using OnlineShop.Application.Responses;
+﻿using OnlineShop.Application.Dto;
+using OnlineShop.Application.Requests;
 
 namespace OnlineShop.Application.Abstractions;
 
 public interface IProductService
 {
-    IReadOnlyCollection<ProductResponse> GetProducts();
+    IReadOnlyCollection<ProductDto> GetProducts();
 
-    Task<ProductResponse> InsetProductAsync(CreateProductRequest product);
+    Task<ProductDto> InsetProductAsync(CreateProductRequest product);
 }
