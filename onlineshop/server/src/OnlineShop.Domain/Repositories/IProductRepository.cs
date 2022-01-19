@@ -1,10 +1,8 @@
-﻿using OnlineShop.Domain.Entities;
+﻿using OnlineShop.Domain.Abstractions;
+using OnlineShop.Domain.Entities;
 
 namespace OnlineShop.Domain.Repositories;
 
-public interface IProductRepository
+public interface IProductRepository : IRepository<Product, Guid>
 {
-    IQueryable<Product> GetProducts();
-
-    Task<Product> InsertProductAsync(Product product);
 }

@@ -1,29 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineShop.Domain.Entities;
+﻿using OnlineShop.Domain.Entities;
 using OnlineShop.Domain.Repositories;
+using OnlineShop.Infrastructure.Data.Common;
 
 namespace OnlineShop.Infrastructure.Data.Repositories;
 
-internal class ProductRepository : IProductRepository
+internal class ProductRepository : RepositoryBase<Product, Guid>, IProductRepository
 {
-    private readonly ApplicationDbContext _context;
-
-    public ProductRepository(ApplicationDbContext context)
+    public ProductRepository(ApplicationDbContext context) 
+        : base(context)
     {
-        _context = context;
-    }
-
-    public IQueryable<Product> GetProducts()
-    {
-        return _context.Products.AsNoTracking();
-    }
-
-    public async Task<Product> InsertProductAsync(Product product)
-    {
-        var entity = await _context.Products.AddAsync(product);
-        
-        await _context.SaveChangesAsync();
-
-        return entity.Entity;
     }
 }
