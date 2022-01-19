@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using OnlineShop.Application.Common.Mappings;
 using OnlineShop.Application.Products.Abstractions;
 using OnlineShop.Application.Products.Services;
@@ -9,7 +10,11 @@ public static class ServiceCollectionExtensions
 {
     public static void AddApplication(this IServiceCollection services)
     {
-        services.AddAutoMapper(typeof(MappingProfile));
+        if (typeof(MappingProfile).Assembly is var assembly)
+        {
+            services.AddAutoMapper(assembly);
+            services.AddValidatorsFromAssembly(assembly, includeInternalTypes: true);
+        }
 
         services.AddScoped<IProductService, ProductService>();
     }

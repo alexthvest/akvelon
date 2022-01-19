@@ -1,14 +1,19 @@
 using OnlineShop.Application;
 using OnlineShop.Infrastructure;
+using OnlineShop.Web.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure services
 builder.Host.ConfigureServices(services =>
 {
-    services.AddControllers();
     services.AddEndpointsApiExplorer();
     services.AddSwaggerGen();
+
+    services.AddControllers(configuration =>
+    {
+        configuration.Filters.Add<ValidationExceptionFilter>();
+    });
 
     services.AddApplication();
     services.AddInfrastructure(builder.Configuration);
