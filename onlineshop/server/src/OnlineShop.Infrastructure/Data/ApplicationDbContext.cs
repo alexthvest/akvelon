@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Domain.Entities;
+using OnlineShop.Infrastructure.Data.Configurations;
 
 namespace OnlineShop.Infrastructure.Data;
 
@@ -14,6 +15,6 @@ public class ApplicationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+        modelBuilder.ApplyConfiguration(new ProductConfiguration());
     }
 }
