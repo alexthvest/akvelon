@@ -6,6 +6,13 @@ namespace OnlineShop.Web.Filters;
 
 internal class ValidationExceptionFilter : IExceptionFilter
 {
+    private readonly ILogger<ValidationExceptionFilter> _logger;
+
+    public ValidationExceptionFilter(ILogger<ValidationExceptionFilter> logger)
+    {
+        _logger = logger;
+    }
+
     public void OnException(ExceptionContext context)
     {
         if (context.Exception is ValidationException validationException)
@@ -18,6 +25,11 @@ internal class ValidationExceptionFilter : IExceptionFilter
 
             context.Result = new BadRequestObjectResult(details);
             context.ExceptionHandled = true;
+
+            if (_logger.IsEnabled(LogLevel.Error))
+            {
+                _logger.LogError(validationException, "Validation error");
+            }
         }
     }
 }

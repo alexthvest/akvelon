@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using FluentValidation;
+using Microsoft.Extensions.Logging;
 using OnlineShop.Application.Products.Abstractions;
 using OnlineShop.Application.Products.Common;
 using OnlineShop.Domain.Entities;
@@ -10,15 +11,18 @@ namespace OnlineShop.Application.Products.Services;
 
 internal class ProductService : IProductService
 {
+    private readonly ILogger<ProductService> _logger;
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
     private readonly IValidator<ProductDetailsDto> _productDetailsValidator;
 
     public ProductService(
+        ILogger<ProductService> logger,
         IMapper mapper,
         IProductRepository productRepository,
         IValidator<ProductDetailsDto> productDetailsValidator)
     {
+        _logger = logger;
         _mapper = mapper;
         _productRepository = productRepository;
         _productDetailsValidator = productDetailsValidator;
@@ -38,6 +42,11 @@ internal class ProductService : IProductService
         var productDto = product is not null
             ? _mapper.Map<Product, ProductDto>(product)
             : null;
+
+        if (productDto is null && _logger.IsEnabled(LogLevel.Warning))
+        {
+            _logger.LogWarning("Product with id {Id} not found", id);
+        }
 
         return productDto;
     }
@@ -67,6 +76,11 @@ internal class ProductService : IProductService
 
         if (product is null)
         {
+            if (_logger.IsEnabled(LogLevel.Warning))
+            {
+                _logger.LogWarning("Product with id {Id} not found", id);
+            }
+
             return null;
         }
 
@@ -85,6 +99,11 @@ internal class ProductService : IProductService
 
         if (product is null)
         {
+            if (_logger.IsEnabled(LogLevel.Warning))
+            {
+                _logger.LogWarning("Product with id {Id} not found", id);
+            }
+
             return false;
         }
 
