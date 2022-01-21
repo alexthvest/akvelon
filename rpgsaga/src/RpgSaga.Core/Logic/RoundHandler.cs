@@ -22,7 +22,8 @@ internal sealed class RoundHandler : IRoundHandler
         _writer.WriteLine("===== Round =====");
         _logger.LogInformation("Round has been started");
 
-        var duels = pairs.Select(p => _duelHandler.Handle(p));
+        var duels = pairs.Select(pair => _duelHandler.Handle(pair));
+
         return new GameRound(duels);
     }
 }
