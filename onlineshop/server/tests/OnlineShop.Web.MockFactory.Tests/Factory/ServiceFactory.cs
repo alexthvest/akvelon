@@ -1,4 +1,4 @@
-﻿using OnlineShop.Application.Interfaces;
+﻿using OnlineShop.Application.Abstractions;
 using OnlineShop.Application.Services;
 using WebAPI.MockFactory.Tests.Factory.Interfaces;
 

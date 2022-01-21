@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using OnlineShop.Infrastructure.Contexts;
+using OnlineShop.Infrastructure.Data;
 using WebAPI.MockFactory.Tests.Factory.Interfaces;
 
 namespace WebAPI.MockFactory.Tests.Factory;

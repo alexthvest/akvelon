@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using OnlineShop.Infrastructure.Contexts;
+using OnlineShop.Infrastructure.Data;
 
 namespace OnlineShop.Web.MockFactory.Tests.Utils;
 

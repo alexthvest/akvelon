@@ -1,5 +1,5 @@
 ﻿using OnlineShop.Domain.Repositories;
-using OnlineShop.Infrastructure.Repositories;
+using OnlineShop.Infrastructure.Data.Repositories;
 using WebAPI.MockFactory.Tests.Factory.Interfaces;
 
 namespace WebAPI.MockFactory.Tests.Factory;
