@@ -29,8 +29,8 @@ public class ProductsController : ApiControllerBase
     {
         var product = _productService.GetProductById(id);
 
-        return product is null 
-            ? NotFound() 
+        return product is null
+            ? NotFound()
             : Ok(product);
     }
 
@@ -49,8 +49,8 @@ public class ProductsController : ApiControllerBase
     {
         var product = await _productService.UpdateProductAsync(id, productDetails, cancellationToken);
 
-        return product is null 
-            ? NotFound() 
+        return product is null
+            ? NotFound()
             : Ok(product);
     }
 

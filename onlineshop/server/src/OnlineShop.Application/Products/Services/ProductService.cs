@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using FluentValidation;
 using OnlineShop.Application.Products.Abstractions;
 using OnlineShop.Application.Products.Common;
 using OnlineShop.Domain.Entities;
@@ -11,11 +12,16 @@ internal class ProductService : IProductService
 {
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
+    private readonly IValidator<ProductDetailsDto> _productDetailsValidator;
 
-    public ProductService(IMapper mapper, IProductRepository productRepository)
+    public ProductService(
+        IMapper mapper,
+        IProductRepository productRepository,
+        IValidator<ProductDetailsDto> productDetailsValidator)
     {
         _mapper = mapper;
         _productRepository = productRepository;
+        _productDetailsValidator = productDetailsValidator;
     }
 
     public IReadOnlyCollection<ProductDto> GetProducts()
@@ -38,6 +44,11 @@ internal class ProductService : IProductService
 
     public async Task<ProductDto> AddProductAsync(ProductDetailsDto productDetails, CancellationToken cancellationToken)
     {
+        if (_productDetailsValidator.Validate(productDetails) is { IsValid: false, Errors: var errors })
+        {
+            throw new ValidationException(errors);
+        }
+
         var product = _mapper.Map<ProductDetailsDto, Product>(productDetails);
 
         await _productRepository.AddAsync(product, cancellationToken);
@@ -47,6 +58,11 @@ internal class ProductService : IProductService
 
     public async Task<ProductDto?> UpdateProductAsync(Guid id, ProductDetailsDto productDetails, CancellationToken cancellationToken)
     {
+        if (_productDetailsValidator.Validate(productDetails) is { IsValid: false, Errors: var errors })
+        {
+            throw new ValidationException(errors);
+        }
+
         var product = _productRepository.FindOne(product => product.Id == id && !product.Deleted);
 
         if (product is null)
