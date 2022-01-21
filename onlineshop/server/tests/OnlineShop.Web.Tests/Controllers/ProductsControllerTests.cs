@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OnlineShop.Application.Dto.Response;
+using OnlineShop.Application.Responses;
 using WebAPI.MockFactory.Tests.Data;
 using Xunit;
 

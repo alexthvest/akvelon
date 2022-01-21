@@ -9,10 +9,12 @@ namespace OnlineShop.Web.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
+    private readonly ILogger<ProductsController> _logger;
     private readonly IProductService _productService;
 
-    public ProductsController(IProductService productService)
+    public ProductsController(ILogger<ProductsController> logger, IProductService productService)
     {
+        _logger = logger;
         _productService = productService;
     }
 
