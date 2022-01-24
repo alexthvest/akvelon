@@ -22,6 +22,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="OnlineShop.Web.MockFactory.Tests" />
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+    <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>
 
 </Project>
