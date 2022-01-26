@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
 using Moq;
 using OnlineShop.Application.Common.Mappings;
 using OnlineShop.Application.Products.Abstractions;
@@ -26,6 +27,8 @@ public class ProductServiceTests
 
     public ProductServiceTests()
     {
+        var logger = Mock.Of<ILogger<ProductService>>();
+
         var mapper = new MapperConfiguration(x => x.AddProfile<MappingProfile>())
             .CreateMapper();
 
@@ -33,6 +36,7 @@ public class ProductServiceTests
         _productRepositoryMock = new Mock<IProductRepository>();
 
         _productService = new ProductService(
+            logger,
             mapper, 
             _productRepositoryMock.Object,
             _productDetailsDtoValidatorMock.Object);
