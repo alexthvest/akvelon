@@ -1,4 +1,4 @@
-﻿namespace OnlineShop.Application.Products.Common;
+namespace OnlineShop.Application.Products.Common;
 
 public class ProductDto : ProductDetailsDto
 {
